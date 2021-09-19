@@ -6,6 +6,7 @@ import 'page/fourth_page.dart';
 import 'page/second_page.dart';
 import 'page/sixth_page.dart';
 import 'page/third_page.dart';
+import 'page/seventh_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/4': (context) => FourthPage(),
           '/5': (context) => FifthPage(),
           '/6': (context) => SixthPage(),
+          '/7': (context) => SeventhPage(),
         });
   }
 }
