@@ -48,6 +48,14 @@ flutter:
   assets:
      - image/HOTPOT4BUY3.jpg
      - image/logoHotpot.png
+     - image/profile.png
+     - image/map1.jpeg
+     - image/APPLEBACKTOSCHOOL.jpg
+     - image/mall.png
+     - image/hotsale.png
+     - image/shopping.png
+     - image/wedeal.png
+     - image/D logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

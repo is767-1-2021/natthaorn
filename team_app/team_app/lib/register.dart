@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:team_app/nav.dart';
 
-class LoginPage extends StatelessWidget {
+class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
-        title: Text("Login"),
+        title: Text("SignUp"),
       ),
       body: Container(
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(20.0),
           child: Form(
             child: SingleChildScrollView(
               child: Column(
@@ -34,8 +34,41 @@ class LoginPage extends StatelessWidget {
                         fontSize: 20,
                         color: Colors.black87),
                   ),
-                  SizedBox(height: 20),
 
+                  //Text("Name", style: TextStyle(fontSize: 16)),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'Name',
+                        hintText: 'Please input your Name',
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade400),
+                        ),
+                        border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.grey.shade400))),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  //Text("Phone Number", style: TextStyle(fontSize: 16)),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        hintText: 'Please input your Phone Number',
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade400),
+                        ),
+                        border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.grey.shade400))),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   //Text("Email", style: TextStyle(fontSize: 16)),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
@@ -68,43 +101,35 @@ class LoginPage extends StatelessWidget {
                           border: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey.shade400)))),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Forgot Password?",
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
-                      ),
-                    ],
+                  SizedBox(
+                    height: 10,
                   ),
-                  SizedBox(height: 10),
+                  //Text("Confirm Password", style: TextStyle(fontSize: 16)),
+                  TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          labelText: 'Confirm Password',
+                          hintText: 'Please input your Confirm Password',
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400)))),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.indigo.shade900,
-                      ),
-                      child: Text("Login",
-                          style: TextStyle(
-                            fontSize: 20,
-                          )),
+                          primary: Colors.indigo.shade900),
+                      child: Text("Sign Up", style: TextStyle(fontSize: 18)),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Nav()));
                       },
                     ),
-                  ),
-                  SizedBox(height: 80),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Text(
-                        "or continue with",
-                        style: TextStyle(fontSize: 18, color: Colors.black54),
-                      ),
-                    ],
-                  ),
+                  )
                 ],
               ),
             ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:team_app/profile.dart';
 import 'package:team_app/searchbar.dart';
+import 'package:team_app/around_you.dart';
+import 'package:team_app/login.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -11,11 +14,14 @@ class Nav extends StatefulWidget {
 class _NavState extends State<Nav> {
   int _selectedIndex = 0;
   final tabs = [
-    Searchbar(), //ปลั๊กหน้า เหมือน routing
-    Center(child: Text('Home')),
-    Center(child: Text('Around You')),
-    Center(child: Text('Favorite')),
-    Center(child: Text('Chat')),
+    Searchbar(),
+    LocationPage(),
+    ProfilePage(
+      title: 'Profile',
+    ),
+    Center(
+      child: Text('Chat'),
+    ) //ปลั๊กหน้า เหมือน routing
   ];
 
   @override
@@ -38,13 +44,13 @@ class _NavState extends State<Nav> {
               label: 'Around You',
               backgroundColor: Colors.red[400]),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: 'Favorite',
-              backgroundColor: Colors.green[400]),
+              icon: Icon(Icons.person),
+              label: 'Profile',
+              backgroundColor: Colors.lightBlue[400]),
           BottomNavigationBarItem(
               icon: Icon(Icons.message),
-              label: 'Chat',
-              backgroundColor: Colors.lightBlue[400]),
+              label: 'Message',
+              backgroundColor: Colors.brown[200]),
         ],
         onTap: (index) {
           setState(() {

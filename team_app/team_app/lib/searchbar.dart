@@ -16,7 +16,7 @@ class Searchbar extends StatelessWidget {
               })
         ],
       ),
-      drawer: Drawer(),
+      //drawer: Drawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -115,7 +115,7 @@ class Searchbar extends StatelessWidget {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => CreateDeal()));
         },
-      ), // Drawer from left,but if we use with Datasearch it cannot use endDrawer
+      ),
     );
   }
 }
