@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:team_app/inboxscreen.dart';
 import 'package:team_app/profile.dart';
 import 'package:team_app/searchbar.dart';
 import 'package:team_app/around_you.dart';
-import 'package:team_app/chatpage.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -16,12 +16,8 @@ class _NavState extends State<Nav> {
   final tabs = [
     Searchbar(),
     LocationPage(),
-    ProfilePage(
-      title: 'Profile',
-    ),
-    Center(
-      child: Text('Chat'),
-    ) //ปลั๊กหน้า เหมือน routing
+    ProfilePage(),
+    InboxScreen(), /*ปลั๊กหน้า เหมือน routing*/
   ];
 
   @override
@@ -38,19 +34,19 @@ class _NavState extends State<Nav> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
-              backgroundColor: Colors.deepOrange[400]),
+              backgroundColor: Colors.deepPurple[800]),
           BottomNavigationBarItem(
               icon: Icon(Icons.near_me),
               label: 'Around You',
-              backgroundColor: Colors.red[400]),
+              backgroundColor: Colors.deepPurple[800]),
           BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',
-              backgroundColor: Colors.lightBlue[400]),
+              backgroundColor: Colors.deepPurple[800]),
           BottomNavigationBarItem(
               icon: Icon(Icons.message),
               label: 'Message',
-              backgroundColor: Colors.brown[200]),
+              backgroundColor: Colors.deepPurple[800]),
         ],
         onTap: (index) {
           setState(() {

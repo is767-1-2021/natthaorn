@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:team_app/main.dart';
 import 'package:team_app/model/message_model.dart';
 
 class InboxScreen extends StatelessWidget {
@@ -12,12 +10,10 @@ class InboxScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 8, //*ใส่เงาใต้ appbar*/
         leading: IconButton(
-            icon: Icon(Icons.menu),
-            color: Colors.indigo[900],
-            onPressed: () {}),
+            icon: Icon(Icons.menu), color: Colors.white, onPressed: () {}),
         title: Text(
           'Inbox',
-          style: TextStyle(color: Colors.indigo[900]),
+          style: TextStyle(color: Colors.white),
         ),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.search), onPressed: () {}),

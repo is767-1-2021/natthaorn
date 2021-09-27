@@ -35,7 +35,7 @@ dependencies:
   open_file: ^3.2.1
   uuid: ^3.0.4
   flutter_image_slideshow: ^0.1.1
-  flutter_cache_store: ^0.8.0
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -91,13 +91,13 @@ flutter:
   fonts:
      - family: IBM Plex Sans Thai
        fonts:
-  #       - asset: fonts/IBMPlexSansThai-Bold.ttf
-  #       - asset: fonts/IBMPlexSansThai-ExtraLight.ttf
-  #       - asset: fonts/IBMPlexSansThai-Light.ttf
-  #       - asset: fonts/IBMPlexSansThai-Medium.ttf
+         - asset: fonts/IBMPlexSansThai-Bold.ttf
+         - asset: fonts/IBMPlexSansThai-ExtraLight.ttf
+         - asset: fonts/IBMPlexSansThai-Light.ttf
+         - asset: fonts/IBMPlexSansThai-Medium.ttf
          - asset: fonts/IBMPlexSansThai-Regular.ttf
-  #       - asset: fonts/IBMPlexSansThai-SemiBold.ttf
-  #       - asset: fonts/IBMPlexSansThai-Thin.ttf
+         - asset: fonts/IBMPlexSansThai-SemiBold.ttf
+         - asset: fonts/IBMPlexSansThai-Thin.ttf
   
   #   - family: Trajan Pro
   #     fonts:

@@ -80,6 +80,8 @@ class Searchbar extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.deepPurple[600],
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(

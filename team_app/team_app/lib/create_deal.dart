@@ -26,6 +26,7 @@ class _NewDealState extends State<NewDeal> {
   String? _dealdescription;
   String? _location;
   int? _numberofpeople;
+  String? _category;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +38,10 @@ class _NewDealState extends State<NewDeal> {
             height: 40,
             child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  'Deal Title',
-                  style: TextStyle(fontSize: 20.0),
-                )),
+                child: Text('Deal Title',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white))),
             decoration: BoxDecoration(
-              color: Colors.blue[300],
+              color: Colors.purple[900],
             ),
           ),
           TextFormField(
@@ -63,10 +62,10 @@ class _NewDealState extends State<NewDeal> {
             height: 40,
             child: Align(
                 alignment: Alignment.centerLeft,
-                child:
-                    Text('Deal Description', style: TextStyle(fontSize: 20.0))),
+                child: Text('Deal Description',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white))),
             decoration: BoxDecoration(
-              color: Colors.blue[200],
+              color: Colors.purple[900],
             ),
           ),
           TextFormField(
@@ -87,12 +86,10 @@ class _NewDealState extends State<NewDeal> {
             height: 40,
             child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  'Deal location',
-                  style: TextStyle(fontSize: 20.0),
-                )),
+                child: Text('Deal location',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white))),
             decoration: BoxDecoration(
-              color: Colors.blue[200],
+              color: Colors.purple[900],
             ),
           ),
           TextFormField(
@@ -113,10 +110,10 @@ class _NewDealState extends State<NewDeal> {
             height: 40,
             child: Align(
                 alignment: Alignment.centerLeft,
-                child:
-                    Text('Number of people', style: TextStyle(fontSize: 20.0))),
+                child: Text('Number of people',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white))),
             decoration: BoxDecoration(
-              color: Colors.blue[200],
+              color: Colors.purple[900],
             ),
           ),
           TextFormField(
@@ -138,13 +135,54 @@ class _NewDealState extends State<NewDeal> {
               _numberofpeople = int.parse(value!);
             },
           ),
+          Container(
+            height: 40,
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text('Category',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white))),
+            decoration: BoxDecoration(
+              color: Colors.purple[900],
+            ),
+          ),
+          DropdownButtonFormField<String>(
+            value: _category,
+            items: [
+              'Food & Berverage',
+              'Entertainment',
+              'Travel',
+              'Groceries',
+              'Other'
+            ] //list of categories
+                .map((label) => DropdownMenuItem(
+                      child: Text(label),
+                      value: label,
+                    ))
+                .toList(),
+            hint: Text('Choose category'),
+            onChanged: (value) {
+              setState(() {
+                _category = value;
+              });
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please choose deal catergory.';
+              }
+
+              return null;
+            },
+            onSaved: (value) {
+              _category = value;
+            },
+          ),
           ElevatedButton(
             onPressed: () {
               if (_dealdetail.currentState!.validate()) {
                 _dealdetail.currentState!.save();
 
                 print(
-                    'your deal has created = $_dealtitle $_dealdescription $_location $_numberofpeople');
+                    'your deal has created = $_dealtitle $_dealdescription $_location $_numberofpeople $_category');
               }
             },
             child: Text('let someone join your deal'),
