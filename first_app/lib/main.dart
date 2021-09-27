@@ -1,4 +1,6 @@
+import 'package:first_app/model/first_form_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'page/fifth_page.dart';
 import 'page/first_page.dart';
@@ -9,7 +11,17 @@ import 'page/third_page.dart';
 import 'page/seventh_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => FirstFormModel(),
+        ),
+        /*เพิ่มโมเดลตัวถัดไปได้ตรงนี้*/
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

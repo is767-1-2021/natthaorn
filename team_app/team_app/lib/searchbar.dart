@@ -1,8 +1,35 @@
 import 'package:flutter/material.dart';
-
 import 'create_deal.dart';
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class Searchbar extends StatelessWidget {
+  final List<String> _dealTitle = <String>[
+    'HOTPOT 4 BUY 3',
+    'H&M SALE 50 OFF',
+    'UltraHD Netflix',
+    'Apple Airpod'
+  ];
+  final List<String> _dealDesc = <String>[
+    'หาตี้ 4 จ่าย 3',
+    'หาคนลดค่า',
+    'หาบ้านหารค่ะ',
+    'หารคนหารค่า'
+  ];
+  final List<String> _dealLocation = <String>[
+    'Siam',
+    'Siam',
+    'none',
+    'Central Ladpaow'
+  ];
+  final List<int> _dealPerson = <int>[3, 3, 3, 1];
+  final List<int> _colorCodes = <int>[600, 500, 300, 100];
+
+  final List<String> _dealName = ['HOTPOT', 'OISHI', 'JUMBO'];
+  final List<String> _dealDetail = [
+    'หารโปรมา 4 จ่าย 3 ค่ะ',
+    'หาคนกินบุฟเฟต์เป็นเพื่อนค่ะ',
+    'ตี้จัมโบ้หมูกระทะค่ะ'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,96 +46,39 @@ class Searchbar extends StatelessWidget {
       //drawer: Drawer(),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            Image.asset('image/HOTPOT4BUY3.jpg'),
-            Card(
-              margin: EdgeInsets.all(10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                width: double.infinity,
-                height: 100,
-                child: Row(
-                  children: [
-                    Container(
-                      height: 80,
-                      width: 80,
-                      child: Image.asset('image/logoHotpot.png'),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        Text('HOTPOT 4 BUY 3'),
-                        Text('Detail about promotion'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              margin: EdgeInsets.all(10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                width: double.infinity,
-                height: 100,
-                child: Row(
-                  children: [
-                    Container(
-                      height: 80,
-                      width: 80,
-                      child: Image.asset('image/logoHotpot.png'),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        Text('HOTPOT 4 BUY 3'),
-                        Text('Detail about promotion'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              margin: EdgeInsets.all(10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                width: double.infinity,
-                height: 100,
-                child: Row(
-                  children: [
-                    Container(
-                      height: 80,
-                      width: 80,
-                      child: Image.asset('image/logoHotpot.png'),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        //**รายละเอียดใน deal */
-                        Text('HOTPOT 4 BUY 3'),
-                        Text('Detail about promotion'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+          children: <Widget>[
+            ImageSlideshow(
+                height: 300,
+                autoPlayInterval: 3000,
+                isLoop: true,
+                children: [
+                  Image.asset('image/HOTPOT4BUY3.jpg', fit: BoxFit.cover),
+                  Image.asset('image/JUMBODEAL.jpg', fit: BoxFit.cover),
+                  Image.asset('image/OISHI4BUY3.jpg', fit: BoxFit.cover),
+                  Image.asset('image/MLB50OFF.jpg', fit: BoxFit.cover),
+                  Image.asset('image/HMSALE.jpg', fit: BoxFit.cover),
+                ]),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: ListView.builder(
+                  itemCount: _dealName.length,
+                  /*้เป็นจำนวน*/
+                  /*index เป็นตัวแทนในแต่ละแถว*/
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: ListTile(
+                        leading: Icon(Icons.dining),
+                        title: Text(_dealName[index]),
+                        subtitle: Text(_dealDetail[index]),
+                        trailing: Icon(Icons.check),
+                      ),
+                    );
+                  }),
             ),
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -119,6 +89,14 @@ class Searchbar extends StatelessWidget {
     );
   }
 }
+
+Widget testbuildvertical() => ListView(
+      children: [
+        ListTile(
+          title: Text('HOTPOT 4 BUY 3'),
+        ),
+      ],
+    );
 
 class DataSearch extends SearchDelegate<String> {
   final keywords = [

@@ -1,5 +1,7 @@
+import 'package:first_app/model/first_form_model.dart';
 import 'package:first_app/page/second_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -36,18 +38,16 @@ class _FirstPageState extends State<FirstPage> {
           children: [
             Padding(
               padding: EdgeInsets.all(20.0),
-              child: Text('$_formData'),
+              child: Consumer<FirstFormModel>(
+                builder: (context, form, child) {
+                  return Text('${form.firstName} ${form.lastName} ${form.age}');
+                },
+              ),
             ),
             ElevatedButton(
               //*async & await use for make sure that we will get the response value to display
-              onPressed: () async {
-                var response = await Navigator.pushNamed(context, '/6');
-
-                if (response != null && !response.toString().isEmpty) {
-                  setState(() {
-                    _formData = response.toString();
-                  });
-                }
+              onPressed: () {
+                Navigator.pushNamed(context, '/6');
               },
               child: Text('Fill This Form please'),
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:team_app/profile.dart';
 import 'package:team_app/searchbar.dart';
 import 'package:team_app/around_you.dart';
-import 'package:team_app/login.dart';
+import 'package:team_app/chatpage.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
