@@ -9,12 +9,6 @@ class Searchbar extends StatelessWidget {
     'UltraHD Netflix',
     'Apple Airpod'
   ];
-  final List<String> _dealDesc = <String>[
-    'หาตี้ 4 จ่าย 3',
-    'หาคนลดค่า',
-    'หาบ้านหารค่ะ',
-    'หารคนหารค่า'
-  ];
   final List<String> _dealLocation = <String>[
     'Siam',
     'Siam',
@@ -30,6 +24,7 @@ class Searchbar extends StatelessWidget {
     'หาคนกินบุฟเฟต์เป็นเพื่อนค่ะ',
     'ตี้จัมโบ้หมูกระทะค่ะ'
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,15 +57,38 @@ class Searchbar extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.6,
               child: ListView.builder(
                   itemCount: _dealName.length,
+                  padding: EdgeInsets.all(10),
                   /*้เป็นจำนวน*/
                   /*index เป็นตัวแทนในแต่ละแถว*/
                   itemBuilder: (context, index) {
                     return Card(
+                      color: Colors.deepPurple[50],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      elevation: 5,
                       child: ListTile(
                         leading: Icon(Icons.dining),
-                        title: Text(_dealName[index]),
-                        subtitle: Text(_dealDetail[index]),
-                        trailing: Icon(Icons.check),
+                        title: Text(_dealTitle[index]),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(_dealDetail[index]),
+                            Wrap(
+                              spacing: 50.0,
+                              children: [
+                                Text(
+                                  _dealLocation[index],
+                                ),
+                                Text(_dealPerson[index].toString()),
+                              ],
+                            ),
+                          ],
+                        ),
+                        trailing: Icon(Icons.favorite_outline),
+                        onTap: () {
+                          /*ไปอีกหน้าหรือไปเซฟเป็น Favorite*/
+                        },
                       ),
                     );
                   }),
