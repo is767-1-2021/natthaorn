@@ -23,19 +23,11 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "WeDeal",
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 35,
-                  color: Colors.indigo.shade900,
-                ),
-              ),
               Container(
                 height: MediaQuery.of(context).size.height / 2,
                 decoration: BoxDecoration(
-                    image:
-                        DecorationImage(image: AssetImage("image/mall.png"))),
+                    image: DecorationImage(
+                        image: AssetImage("image/WeDeal_logo.png"))),
               ),
               Column(children: <Widget>[
                 MaterialButton(

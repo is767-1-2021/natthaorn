@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:team_app/historyPageDeal.dart';
+import 'package:team_app/model/ProfileFormModel.dart';
+import 'package:provider/provider.dart';
+import 'package:team_app/edit_profile.dart';
+import 'package:team_app/nav.dart';
 
-var assetImage = AssetImage('image/profile.png');
+var assetImage = AssetImage('assets/profile.png');
 var image = Image(
   image: assetImage,
 );
@@ -13,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final Titles = [
+    final List<String> ProfileTitles = [
       'History Deal',
       'WeDeal Rewards',
       'Favorite',
@@ -29,11 +34,17 @@ class _ProfilePageState extends State<ProfilePage> {
     ];
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Nav()));
+          },
+        ),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.deepPurple[600],
         title: Text(
           'Profile',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
         actions: [
           PopupMenuButton(
@@ -92,7 +103,10 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/2');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditProfilePage()));
                 },
                 child: Text(
                   "Edit Profile",
@@ -106,7 +120,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   return Card(
                     child: ListTile(
                       leading: Icon(icons[index]),
-                      title: Text(Titles[index]),
+                      title: Text(ProfileTitles[index]),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HistoryDealPage()));
+                      },
                     ),
                   );
                 },
@@ -114,7 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                primary: Colors.amber,
+                primary: Colors.deepPurple[600],
                 onPrimary: Colors.white,
               ),
               onPressed: () {},

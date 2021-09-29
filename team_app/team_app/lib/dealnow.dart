@@ -54,6 +54,7 @@ class _DealNowState extends State<DealNow> {
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     child: ListTile(
+                      tileColor: Colors.deepPurple[50],
                       leading: Icon(Icons.dining),
                       title: Text(_dealtitle[index]),
                       subtitle: Column(
@@ -68,6 +69,12 @@ class _DealNowState extends State<DealNow> {
                             ],
                           ),
                         ],
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.favorite_border),
+                        onPressed: () {
+                          /*add to favorite list*/
+                        },
                       ),
                     ),
                   );

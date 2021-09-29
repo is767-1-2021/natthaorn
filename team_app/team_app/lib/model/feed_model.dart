@@ -75,6 +75,7 @@ List<DealList> Deals = [
       location: 'Siam one',
       numberofpeople: 3,
       category: 'Food&Beverage'),
+
   DealList(
       dealtitle: 'OISHI BUFFET',
       dealdescription: 'หารตี้หารโออิชิบุฟค่ะ',
