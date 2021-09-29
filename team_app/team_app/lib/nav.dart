@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:team_app/dealnow.dart';
 import 'package:team_app/inboxscreen.dart';
 import 'package:team_app/profile.dart';
 import 'package:team_app/searchbar.dart';
@@ -14,10 +15,12 @@ class Nav extends StatefulWidget {
 class _NavState extends State<Nav> {
   int _selectedIndex = 0;
   final tabs = [
-    Searchbar(),
+    /*ปลั๊กหน้า เหมือน routing*/
+    DealNow(),
     LocationPage(),
     ProfilePage(),
-    InboxScreen(), /*ปลั๊กหน้า เหมือน routing*/
+    InboxScreen(),
+    Searchbar(),
   ];
 
   @override
@@ -46,6 +49,10 @@ class _NavState extends State<Nav> {
           BottomNavigationBarItem(
               icon: Icon(Icons.message),
               label: 'Message',
+              backgroundColor: Colors.deepPurple[800]),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
               backgroundColor: Colors.deepPurple[800]),
         ],
         onTap: (index) {

@@ -1,35 +1,11 @@
 import 'package:flutter/material.dart';
-import 'create_deal.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class Searchbar extends StatelessWidget {
-  final List<String> _dealTitle = <String>[
-    'HOTPOT 4 BUY 3',
-    'H&M SALE 50 OFF',
-    'UltraHD Netflix',
-    'Apple Airpod'
-  ];
-  final List<String> _dealLocation = <String>[
-    'Siam',
-    'Siam',
-    'none',
-    'Central Ladpaow'
-  ];
-  final List<int> _dealPerson = <int>[3, 3, 3, 1];
-  final List<int> _colorCodes = <int>[600, 500, 300, 100];
-
-  final List<String> _dealName = ['HOTPOT', 'OISHI', 'JUMBO'];
-  final List<String> _dealDetail = [
-    'หารโปรมา 4 จ่าย 3 ค่ะ',
-    'หาคนกินบุฟเฟต์เป็นเพื่อนค่ะ',
-    'ตี้จัมโบ้หมูกระทะค่ะ'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search App'),
+        title: Text('Search Deal'),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.search),
@@ -38,85 +14,9 @@ class Searchbar extends StatelessWidget {
               })
         ],
       ),
-      //drawer: Drawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            ImageSlideshow(
-                height: 300,
-                autoPlayInterval: 3000,
-                isLoop: true,
-                children: [
-                  Image.asset('image/HOTPOT4BUY3.jpg', fit: BoxFit.cover),
-                  Image.asset('image/JUMBODEAL.jpg', fit: BoxFit.cover),
-                  Image.asset('image/OISHI4BUY3.jpg', fit: BoxFit.cover),
-                  Image.asset('image/MLB50OFF.jpg', fit: BoxFit.cover),
-                  Image.asset('image/HMSALE.jpg', fit: BoxFit.cover),
-                ]),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.6,
-              child: ListView.builder(
-                  itemCount: _dealName.length,
-                  padding: EdgeInsets.all(10),
-                  /*้เป็นจำนวน*/
-                  /*index เป็นตัวแทนในแต่ละแถว*/
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: Colors.deepPurple[50],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      elevation: 5,
-                      child: ListTile(
-                        leading: Icon(Icons.dining),
-                        title: Text(_dealTitle[index]),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(_dealDetail[index]),
-                            Wrap(
-                              spacing: 50.0,
-                              children: [
-                                Text(
-                                  _dealLocation[index],
-                                ),
-                                Text(_dealPerson[index].toString()),
-                              ],
-                            ),
-                          ],
-                        ),
-                        trailing: Icon(Icons.favorite_outline),
-                        onTap: () {
-                          /*ไปอีกหน้าหรือไปเซฟเป็น Favorite*/
-                        },
-                      ),
-                    );
-                  }),
-            ),
-          ],
-        ),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.deepPurple[600],
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CreateDeal()));
-        },
-      ),
     );
   }
 }
-
-Widget testbuildvertical() => ListView(
-      children: [
-        ListTile(
-          title: Text('HOTPOT 4 BUY 3'),
-        ),
-      ],
-    );
 
 class DataSearch extends SearchDelegate<String> {
   final keywords = [

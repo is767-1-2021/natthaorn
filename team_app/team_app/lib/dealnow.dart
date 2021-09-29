@@ -1,41 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'create_deal.dart';
 
-class Dealnow extends StatefulWidget {
-  const Dealnow({Key? key}) : super(key: key);
+class DealNow extends StatefulWidget {
+  const DealNow({Key? key}) : super(key: key);
 
   @override
-  _DealnowState createState() => _DealnowState();
+  _DealNowState createState() => _DealNowState();
 }
 
-class _DealnowState extends State<Dealnow> {
+class _DealNowState extends State<DealNow> {
+  final List<String> _dealtitle = <String>[
+    'HOTPOT 4 BUY 3',
+    'H&M SALE 50 OFF',
+    'UltraHD Netflix',
+  ];
+
+  final List<String> _location = <String>[
+    'Siam',
+    'Siam',
+    'none',
+  ];
+  final List<int> _numberofpeople = <int>[3, 3, 3];
+
+  final List<String> _dealdescription = [
+    'หารโปรมา 4 จ่าย 3 ค่ะ',
+    'หาคนกินบุฟเฟต์เป็นเพื่อนค่ะ',
+    'ตี้จัมโบ้หมูกระทะค่ะ',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Card Tutorial'),
-      ),
-      body: Center(
-        //*wrap the card with center */
-        child: Card(
-          color: Colors.amber[200],
-          child: Container(
-            padding: EdgeInsets.all(10),
-            height: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                    'Night Rain in the city | Sleep, Relax & Study Sounds | Ambient Noise.',
-                    style: TextStyle(fontSize: 20)),
-                SizedBox(height: 10.0),
-                Text('Card 2',
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-              ],
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(top: 50),
+        child: Column(
+          children: <Widget>[
+            ImageSlideshow(
+                height: 250,
+                autoPlayInterval: 3000,
+                isLoop: true,
+                children: [
+                  Image.asset('image/HOTPOT4BUY3.jpg', fit: BoxFit.cover),
+                  Image.asset('image/JUMBODEAL.jpg', fit: BoxFit.cover),
+                  Image.asset('image/OISHI4BUY3.jpg', fit: BoxFit.cover),
+                  Image.asset('image/MLB50OFF.jpg', fit: BoxFit.cover),
+                  Image.asset('image/HMSALE.jpg', fit: BoxFit.cover),
+                ]),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: ListView.builder(
+                itemCount: _dealtitle.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: ListTile(
+                      leading: Icon(Icons.dining),
+                      title: Text(_dealtitle[index]),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(_dealdescription[index]),
+                          Wrap(
+                            spacing: 50.0,
+                            children: [
+                              Text(_location[index]),
+                              Text(_numberofpeople[index].toString()),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
+          ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.deepPurple[600],
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => CreateDeal()));
+          }),
     );
   }
 }

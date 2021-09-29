@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:team_app/model/feed_model.dart';
 
 class CreateDeal extends StatelessWidget {
   @override
@@ -183,6 +185,12 @@ class _NewDealState extends State<NewDeal> {
 
                 print(
                     'your deal has created = $_dealtitle $_dealdescription $_location $_numberofpeople $_category');
+
+                context.read<FeedDeal>().dealtitle = _dealtitle;
+                context.read<FeedDeal>().dealdescription = _dealdescription;
+                context.read<FeedDeal>().location = _location;
+                context.read<FeedDeal>().numberofpeople = _numberofpeople;
+                context.read<FeedDeal>().category = _category;
               }
             },
             child: Text('let someone join your deal'),

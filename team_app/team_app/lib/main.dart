@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:team_app/nav.dart';
+import 'package:provider/provider.dart';
+import 'package:team_app/model/feed_model.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => FeedDeal(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
