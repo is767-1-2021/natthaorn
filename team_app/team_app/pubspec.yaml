@@ -28,7 +28,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_chat_ui: ^1.4.3
+  flutter_chat_ui: ^1.4.4
   file_picker: ^4.1.1
   image_picker: ^0.8.4+1
   mime: ^1.0.0
@@ -37,6 +37,7 @@ dependencies:
   flutter_image_slideshow: ^0.1.1
   provider: ^6.0.1
   date_field: ^2.1.2
+  icon_picker: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -63,20 +64,8 @@ flutter:
      - image/profile.png
      - image/map1.jpeg
      - image/APPLEBACKTOSCHOOL.jpg
-     - image/mall.png
      - image/hotsale.png
-     - image/shopping.png
      - image/wedeal.png
-     - image/D logo.png
-     - image/captain_america.jpg
-     - image/ironman.jpeg
-     - image/hulk.jpg
-     - image/nick-fury.jpg
-     - image/spiderman.jpg
-     - image/thor.png
-     - image/scarlet-witch.jpg
-     - image/black-widow.jpg
-     - image/captain-marvel.jpg
      - image/WeDeal_logo.png
      - image/potatocorner.jpg
      - image/profile2.jpg

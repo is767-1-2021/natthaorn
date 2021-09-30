@@ -10,6 +10,12 @@ class DealNow extends StatefulWidget {
 }
 
 class _DealNowState extends State<DealNow> {
+  final List<Icon> _category = <Icon>[
+    Icon(Icons.dining),
+    Icon(Icons.shopping_bag),
+    Icon(Icons.tv_sharp),
+  ];
+
   final List<String> _dealtitle = <String>[
     'HOTPOT 4 BUY 3',
     'H&M SALE 50 OFF',
@@ -54,8 +60,8 @@ class _DealNowState extends State<DealNow> {
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     child: ListTile(
-                      tileColor: Colors.deepPurple[50],
-                      leading: Icon(Icons.dining),
+                      tileColor: Colors.orange[50],
+                      leading: (_category[index]),
                       title: Text(_dealtitle[index]),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

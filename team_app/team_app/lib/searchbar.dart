@@ -70,20 +70,8 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // show some result based on the selection
-    return Center(
-      //*ครอบทุกอันให้อยู่ตรงกลาง
-      child: Container(
-        height: 100.0,
-        width: 100.0,
-        child: Card(
-          //**ครอบด้วย container สร้างกรอบสีแดงให้อยู่ตรงกลาง  */
-          color: Colors.red[400],
-          child: Center(
-            //*จัด text ตรงกลาง
-            child: Text(query),
-          ),
-        ),
-      ),
+    return ListTile(
+      leading: Icon(Icons.dining),
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:team_app/chatpage.dart';
 import 'package:team_app/dealnow.dart';
-import 'package:team_app/inboxscreen.dart';
 import 'package:team_app/profile.dart';
 import 'package:team_app/searchbar.dart';
 import 'package:team_app/around_you.dart';
@@ -19,7 +19,7 @@ class _NavState extends State<Nav> {
     DealNow(),
     LocationPage(),
     ProfilePage(),
-    InboxScreen(),
+    ChatPage(),
     Searchbar(),
   ];
 
