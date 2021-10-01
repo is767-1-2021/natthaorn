@@ -14,25 +14,33 @@ class _DealNowState extends State<DealNow> {
     Icon(Icons.dining),
     Icon(Icons.shopping_bag),
     Icon(Icons.tv_sharp),
+    Icon(Icons.calendar_today),
+    Icon(Icons.calendar_today),
   ];
 
   final List<String> _dealtitle = <String>[
     'HOTPOT 4 BUY 3',
     'H&M SALE 50 OFF',
     'UltraHD Netflix',
+    'MOONCAKE S&P',
+    'MOONCAKE S&P',
   ];
 
   final List<String> _location = <String>[
     'Siam',
     'Siam',
     'none',
+    'Central World',
+    'Central World',
   ];
-  final List<int> _numberofpeople = <int>[3, 3, 3];
+  final List<int> _numberofpeople = <int>[3, 3, 3, 3, 3];
 
   final List<String> _dealdescription = [
     'หารโปรมา 4 จ่าย 3 ค่ะ',
     'หาคนกินบุฟเฟต์เป็นเพื่อนค่ะ',
     'ตี้จัมโบ้หมูกระทะค่ะ',
+    'หารตี้ขนมไหว้พระจันทร์ค่ะ',
+    'หารตี้ขนมไหว้พระจันทร์ค่ะ',
   ];
 
   @override
@@ -43,7 +51,7 @@ class _DealNowState extends State<DealNow> {
         child: Column(
           children: <Widget>[
             ImageSlideshow(
-                height: 250,
+                height: 230,
                 autoPlayInterval: 3000,
                 isLoop: true,
                 children: [
@@ -55,7 +63,7 @@ class _DealNowState extends State<DealNow> {
                 ]),
             Padding(padding: EdgeInsets.only(top: 15)),
             Container(
-              height: MediaQuery.of(context).size.height * 0.6,
+              height: MediaQuery.of(context).size.height * 0.5,
               child: ListView.separated(
                 padding: EdgeInsets.all(10),
                 itemCount: _dealtitle.length,
