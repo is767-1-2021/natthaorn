@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class ThirdPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /*ปกติสามารถเขียน tab controller แยกไปอีกได้*/
     return DefaultTabController(
       initialIndex: 1,
       length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Third Page'),
+          /*ืbottom ของ app Bar */
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.cloud)),

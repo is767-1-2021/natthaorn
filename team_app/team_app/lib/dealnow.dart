@@ -55,7 +55,7 @@ class _DealNowState extends State<DealNow> {
                 ]),
             Container(
               height: MediaQuery.of(context).size.height * 0.6,
-              child: ListView.builder(
+              child: ListView.separated(
                 itemCount: _dealtitle.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
@@ -85,6 +85,7 @@ class _DealNowState extends State<DealNow> {
                     ),
                   );
                 },
+                separatorBuilder: (context, index) => const Divider(),
               ),
             ),
           ],
