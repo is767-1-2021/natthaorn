@@ -53,39 +53,40 @@ class _DealNowState extends State<DealNow> {
                   Image.asset('image/MLB50OFF.jpg', fit: BoxFit.cover),
                   Image.asset('image/HMSALE.jpg', fit: BoxFit.cover),
                 ]),
+            Padding(padding: EdgeInsets.only(top: 15)),
             Container(
               height: MediaQuery.of(context).size.height * 0.6,
               child: ListView.separated(
+                padding: EdgeInsets.all(10),
                 itemCount: _dealtitle.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: ListTile(
-                      tileColor: Colors.orange[50],
-                      leading: (_category[index]),
-                      title: Text(_dealtitle[index]),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(_dealdescription[index]),
-                          Wrap(
-                            spacing: 50.0,
-                            children: [
-                              Text(_location[index]),
-                              Text(_numberofpeople[index].toString()),
-                            ],
-                          ),
-                        ],
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.favorite_border),
-                        onPressed: () {
-                          /*add to favorite list*/
-                        },
-                      ),
+                  return ListTile(
+                    tileColor: Colors.purple[50],
+                    leading: (_category[index]),
+                    title: Text(_dealtitle[index]),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(_dealdescription[index]),
+                        Wrap(
+                          spacing: 100.0,
+                          children: [
+                            Text(_location[index]),
+                            Text(_numberofpeople[index].toString()),
+                          ],
+                        ),
+                      ],
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.favorite_border),
+                      onPressed: () {
+                        /*add to favorite list*/
+                      },
                     ),
                   );
                 },
-                separatorBuilder: (context, index) => const Divider(),
+                separatorBuilder: (context, index) =>
+                    const Divider(color: Colors.blueGrey),
               ),
             ),
           ],
