@@ -43,11 +43,13 @@ class FourthPage extends StatelessWidget {
   }
 }
 
+/*้เป็นที่เก็บ data ว่ามีตัวไหนบ้าง สร้างตัวแปรก่อน*/
 class ProductItem {
   final String name;
   final String price;
   final int colorShade;
 
+/*constructure =>ประกาศฟังก์ชันด้วยชื่อเดียวกับคลาส แต่เป็นการย่อด้วย this */
   const ProductItem(
       {Key? key,
       required this.name,
