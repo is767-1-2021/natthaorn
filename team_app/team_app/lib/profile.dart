@@ -90,12 +90,27 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: EdgeInsets.all(10),
                 child:
                     Consumer<ProfileFormModel>(builder: (context, form, child) {
-                  return Text(
-                    '${form.userName}',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24),
+                  return Column(
+                    children: [
+                      Text(
+                        '${form.userName}',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
+                      ),
+                      Wrap(
+                        spacing: 20,
+                        children: [
+                          Text('${form.firstName}',
+                              style: TextStyle(
+                                  color: Colors.deepPurple[400], fontSize: 20)),
+                          Text('${form.lastName}',
+                              style: TextStyle(
+                                  color: Colors.deepPurple[400], fontSize: 20)),
+                        ],
+                      ),
+                    ],
                   );
                 })),
             TextButton(

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class ProfileFormModel extends ChangeNotifier {
   String? _userName = 'Somchai';
   String? _firstName = 'Somchai';
-  String? _lastName;
-  String? _dateOfBirth = 'October 6, 1986';
+  String? _lastName = 'LakSong';
+  String? _dateOfBirth;
   int? _age;
-  String? _gender;
-  String? _email;
+  String? _gender = 'Male';
+  String? _email = 'Somchai@mail.com';
   String? _changPassword;
   String? _confirmPassword;
 
