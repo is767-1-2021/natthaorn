@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:date_field/date_field.dart';
-import 'package:team_app/model/ProfileFormModel.dart';
-import 'package:team_app/profile.dart';
+import 'model/ProfileFormModel.dart';
 
 class EditProfilePage extends StatelessWidget {
   @override
@@ -12,6 +11,12 @@ class EditProfilePage extends StatelessWidget {
         centerTitle: true,
         title: Text('Edit Profile'),
         backgroundColor: Colors.deepPurple[600],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile');
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
       body: EditProfileForm(),
     );
@@ -28,14 +33,11 @@ class _EditProfileFormState extends State<EditProfileForm> {
 
   final _formKey = GlobalKey<FormState>();
   String? _userName;
-  String? _firstName;
-  String? _lastName;
+  String? _phoneNumber;
+  String? _email;
   String? _dateOfBirth;
   int? _age;
   String? _gender;
-  String? _email;
-  String? _changPassword;
-  String? _confirmPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 padding: EdgeInsets.all(10.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    labelText: "Username",
+                    labelText: "Name",
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(28.0),
                       borderSide: BorderSide(color: Colors.deepPurple.shade600),
@@ -61,13 +63,13 @@ class _EditProfileFormState extends State<EditProfileForm> {
                         color: Colors.amber,
                       ),
                     ),
-                    hintText: "Enter username",
+                    hintText: "Enter Name",
                     prefixIcon: Icon(Icons.face_retouching_natural,
                         color: Colors.black45),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter username';
+                      return 'Please enter name';
                     }
                     return null;
                   },
@@ -82,7 +84,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 padding: EdgeInsets.all(10.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    labelText: "First Name",
+                    labelText: "Phone",
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(28.0),
                       borderSide: BorderSide(color: Colors.deepPurple.shade600),
@@ -93,28 +95,28 @@ class _EditProfileFormState extends State<EditProfileForm> {
                         color: Colors.amber,
                       ),
                     ),
-                    hintText: "Enter firstname",
-                    prefixIcon:
-                        Icon(Icons.account_circle, color: Colors.black45),
+                    hintText: "Enter phone number",
+                    prefixIcon: Icon(Icons.phone, color: Colors.black45),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter firstname';
+                      return 'Please enter phone number';
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    _firstName = value;
+                    _phoneNumber = value;
                   },
-                  initialValue: context.read<ProfileFormModel>().firstName,
+                  initialValue: context.read<ProfileFormModel>().phoneNumber,
                 ),
               ),
               Container(
                 width: 500,
                 padding: EdgeInsets.all(10.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    labelText: "Last Name",
+                    labelText: "Email",
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(28.0),
                       borderSide: BorderSide(color: Colors.deepPurple.shade600),
@@ -125,20 +127,20 @@ class _EditProfileFormState extends State<EditProfileForm> {
                         color: Colors.amber,
                       ),
                     ),
-                    hintText: "Enter lastname",
+                    hintText: "Enter email",
                     prefixIcon:
                         Icon(Icons.account_circle, color: Colors.black45),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter lastname';
+                      return 'Please enter email';
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    _lastName = value;
+                    _email = value;
                   },
-                  initialValue: context.read<ProfileFormModel>().lastName,
+                  initialValue: context.read<ProfileFormModel>().email,
                 ),
               ),
               Container(
@@ -234,118 +236,6 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   initialValue: context.read<ProfileFormModel>().gender,
                 ),
               ),
-              Container(
-                width: 500,
-                padding: EdgeInsets.all(10.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Email",
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(28.0),
-                      borderSide: BorderSide(color: Colors.deepPurple.shade600),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(28.0),
-                      borderSide: BorderSide(
-                        color: Colors.amber,
-                      ),
-                    ),
-                    hintText: "Enter email",
-                    prefixIcon: Icon(Icons.mail_outline, color: Colors.black45),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter email';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _email = value;
-                  },
-                  initialValue: context.read<ProfileFormModel>().email,
-                ),
-              ),
-              Container(
-                width: 500,
-                padding: EdgeInsets.all(10.0),
-                child: TextFormField(
-                  obscureText: _isHiden,
-                  decoration: InputDecoration(
-                      labelText: "Chang Password",
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(28.0),
-                        borderSide:
-                            BorderSide(color: Colors.deepPurple.shade600),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(28.0),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                        ),
-                      ),
-                      hintText: "Enter new password",
-                      prefixIcon: Icon(Icons.password, color: Colors.black45),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _isHiden = !_isHiden;
-                          });
-                        },
-                        icon: Icon(
-                            _isHiden ? Icons.visibility : Icons.visibility_off),
-                      )),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter new password';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _changPassword = value;
-                  },
-                  initialValue: context.read<ProfileFormModel>().dateOfBirth,
-                ),
-              ),
-              Container(
-                width: 500,
-                padding: EdgeInsets.all(10.0),
-                child: TextFormField(
-                  obscureText: _isHiden,
-                  decoration: InputDecoration(
-                      labelText: "Confirm Password",
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(28.0),
-                        borderSide:
-                            BorderSide(color: Colors.deepPurple.shade600),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(28.0),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                        ),
-                      ),
-                      hintText: "Enter new password",
-                      prefixIcon: Icon(Icons.password, color: Colors.black45),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _isHiden = !_isHiden;
-                          });
-                        },
-                        icon: Icon(
-                            _isHiden ? Icons.visibility : Icons.visibility_off),
-                      )),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter new password';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _confirmPassword = value;
-                  },
-                ),
-              ),
               Padding(padding: EdgeInsets.all(10)),
               ElevatedButton(
                 onPressed: () {
@@ -353,11 +243,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
                     _formKey.currentState!.save();
 
                     context.read<ProfileFormModel>().userName = _userName;
-                    context.read<ProfileFormModel>().firstName = _firstName;
-                    context.read<ProfileFormModel>().lastName = _lastName;
+                    context.read<ProfileFormModel>().phoneNumber = _phoneNumber;
+                    context.read<ProfileFormModel>().email = _email;
                     context.read<ProfileFormModel>().age = _age;
                     context.read<ProfileFormModel>().gender = _gender;
-                    context.read<ProfileFormModel>().email = _email;
 
                     Navigator.pop(context);
                   }

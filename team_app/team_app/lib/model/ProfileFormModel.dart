@@ -2,15 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfileFormModel extends ChangeNotifier {
-  String? _userName = 'Somchai';
-  String? _firstName = 'Somchai';
-  String? _lastName = 'LakSong';
+  String? _userName = 'John Doe ';
+  String? _phoneNumber = '0891234567';
+  String? _email = 'jdoe@gmail.com';
   String? _dateOfBirth;
-  int? _age;
+  int? _age = 30;
   String? _gender = 'Male';
-  String? _email = 'Somchai@mail.com';
-  String? _changPassword;
-  String? _confirmPassword;
 
   get userName => this._userName;
 
@@ -19,17 +16,17 @@ class ProfileFormModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  get firstName => this._firstName;
+  get phoneNumber => this._phoneNumber;
 
-  set firstName(value) {
-    this._firstName = value;
+  set phoneNumber(value) {
+    this._phoneNumber = value;
     notifyListeners();
   }
 
-  get lastName => this._lastName;
+  get email => this._email;
 
-  set lastName(value) {
-    this._lastName = value;
+  set email(value) {
+    this._email = value;
     notifyListeners();
   }
 
@@ -51,27 +48,6 @@ class ProfileFormModel extends ChangeNotifier {
 
   set gender(value) {
     this._gender = value;
-    notifyListeners();
-  }
-
-  get email => this._email;
-
-  set email(value) {
-    this._email = value;
-    notifyListeners();
-  }
-
-  get changPassword => this._changPassword;
-
-  set changPassword(value) {
-    this._changPassword = value;
-    notifyListeners();
-  }
-
-  get confirmPassword => this._confirmPassword;
-
-  set confirmPassword(value) {
-    this._confirmPassword = value;
     notifyListeners();
   }
 }

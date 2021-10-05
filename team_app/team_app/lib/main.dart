@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:team_app/edit_profile.dart';
 import 'package:team_app/firstpage.dart';
+import 'package:team_app/historyPageDeal.dart';
 import 'package:team_app/login.dart';
 import 'package:team_app/model/Created_Deal_Model.dart';
 import 'package:team_app/nav.dart';
 import 'package:provider/provider.dart';
-import 'package:team_app/register.dart';
-
 import 'model/ProfileFormModel.dart';
+import 'profile.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/home': (context) => HomePage(),
         '/Nav': (context) => Nav(),
+        '/editProfile': (context) => EditProfilePage(),
+        '/profile': (context) => ProfilePage(),
+        '/historydeal': (context) => HistoryDealPage(),
       },
     );
   }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:team_app/edit_profile.dart';
-import 'package:team_app/historyPageDeal.dart';
-import 'package:team_app/model/ProfileFormModel.dart';
+import 'model/ProfileFormModel.dart';
 
 var assetImage = AssetImage('image/profile.png');
 var image = Image(
@@ -19,20 +17,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> ProfileTitles = [
-      'History Deal',
-      'WeDeal Rewards',
-      'Favorite',
-      'Help Center',
-      'Q&A'
-    ];
-    final icons = [
-      Icons.history,
-      Icons.verified,
-      Icons.favorite,
-      Icons.help,
-      Icons.question_answer
-    ];
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(onPressed: () {
@@ -53,16 +37,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       value: 1,
                     ),
                     PopupMenuItem(
-                      child: Text('Location'),
+                      child: Text('Change Password'),
                       value: 2,
                     ),
                     PopupMenuItem(
-                      child: Text('Privacy Policy'),
+                      child: Text('Location'),
                       value: 3,
                     ),
                     PopupMenuItem(
-                      child: Text('Terms of service'),
+                      child: Text('Privacy Policy'),
                       value: 4,
+                    ),
+                    PopupMenuItem(
+                      child: Text('Terms of service'),
+                      value: 5,
                     ),
                   ]),
           SizedBox(
@@ -70,104 +58,275 @@ class _ProfilePageState extends State<ProfilePage> {
           )
         ],
       ),
-      body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              width: 150.0,
-              height: 150.0,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage('image/profile.png'))),
-              alignment: Alignment.topCenter,
-            ),
-            Padding(
-                padding: EdgeInsets.all(10),
-                child:
-                    Consumer<ProfileFormModel>(builder: (context, form, child) {
-                  return Column(
-                    children: [
-                      Text(
-                        '${form.userName}',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      ),
-                      Wrap(
-                        spacing: 20,
-                        children: [
-                          Text('${form.firstName}',
-                              style: TextStyle(
-                                  color: Colors.deepPurple[400], fontSize: 20)),
-                          Text('${form.lastName}',
-                              style: TextStyle(
-                                  color: Colors.deepPurple[400], fontSize: 20)),
-                        ],
-                      ),
-                    ],
-                  );
-                })),
-            TextButton(
-                onPressed: () async {
-                  var response = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditProfilePage()));
-
-                  if (response != null && response.toString().isNotEmpty) {
-                    setState(() {
-                      _formData = response.toString();
-                    });
-                  }
-                },
-                child: Text(
-                  "Edit Profile",
-                  style: TextStyle(color: Colors.black45, fontSize: 16),
-                )),
-            SizedBox(height: 5),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      leading: Icon(icons[index]),
-                      title: Text(ProfileTitles[index]),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HistoryDealPage()));
-                      },
+      body: SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      width: 150.0,
+                      height: 150.0,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage('image/profile.png'))),
+                      alignment: Alignment.topCenter,
                     ),
-                  );
-                },
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            var response = await Navigator.pushNamed(
+                                context, '/editProfile');
+
+                            if (response != null &&
+                                !response.toString().isEmpty) {
+                              setState(() {
+                                _formData = response.toString();
+                              });
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple.shade600,
+                            onPrimary: Colors.white,
+                          ),
+                          child: Text('Edit Profile')),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Consumer<ProfileFormModel>(
+                        builder: (context, form, child) {
+                          return Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                              ),
+                              Text(
+                                'Name',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20),
+                              ),
+                              Text(
+                                '${form.userName}',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Consumer<ProfileFormModel>(
+                        builder: (context, form, child) {
+                          return Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                              ),
+                              Text(
+                                'Phone',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20),
+                              ),
+                              Text(
+                                '${form.phoneNumber}',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Consumer<ProfileFormModel>(
+                        builder: (context, form, child) {
+                          return Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                              ),
+                              Text(
+                                'Email',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20),
+                              ),
+                              Text(
+                                '${form.email}',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Consumer<ProfileFormModel>(
+                        builder: (context, form, child) {
+                          return Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                              ),
+                              Text(
+                                'Age',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20),
+                              ),
+                              Text(
+                                '${form.age}',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Consumer<ProfileFormModel>(
+                        builder: (context, form, child) {
+                          return Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                              ),
+                              Text(
+                                'Gender',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20),
+                              ),
+                              Text(
+                                '${form.gender}',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      child: Card(
+                        child: ListTile(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/historydeal');
+                          },
+                          title: Text(
+                            'History Deal',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black38),
+                          ),
+                          leading: Icon(Icons.history),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      child: Card(
+                        child: ListTile(
+                          onTap: () {},
+                          title: Text(
+                            'Favorite Deal',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black38),
+                          ),
+                          leading: Icon(Icons.favorite),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      child: Card(
+                        child: ListTile(
+                          onTap: () {},
+                          title: Text(
+                            'Help Center',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black38),
+                          ),
+                          leading: Icon(Icons.help),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      child: Card(
+                        child: ListTile(
+                          onTap: () {},
+                          title: Text(
+                            'Q&A',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black38),
+                          ),
+                          leading: Icon(Icons.question_answer),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        child: Text('Log Out'),
+                        onPressed: () {
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/home'));
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple.shade600,
+                            onPrimary: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.deepPurple[600],
-                onPrimary: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName('/home'));
-              },
-              icon: Icon(
-                Icons.logout,
-                size: 18,
-              ),
-              label: Text(
-                "Log Out",
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(bottom: 15))
-          ])),
+            ]),
+      ),
     );
   }
 }
