@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:team_app/historyPageDeal.dart';
-import 'package:team_app/model/ProfileFormModel.dart';
 import 'package:provider/provider.dart';
 import 'package:team_app/edit_profile.dart';
-import 'package:team_app/nav.dart';
+import 'package:team_app/historyPageDeal.dart';
+import 'package:team_app/model/ProfileFormModel.dart';
 
-var assetImage = AssetImage('assets/profile.png');
+var assetImage = AssetImage('image/profile.png');
 var image = Image(
   image: assetImage,
 );
@@ -16,6 +15,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String? _formData = 'Please enter username';
+
   @override
   Widget build(BuildContext context) {
     final List<String> ProfileTitles = [
@@ -34,12 +35,9 @@ class _ProfilePageState extends State<ProfilePage> {
     ];
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Nav()));
-          },
-        ),
+        leading: BackButton(onPressed: () {
+          Navigator.pushNamed(context, '/Nav');
+        }),
         centerTitle: true,
         backgroundColor: Colors.deepPurple[600],
         title: Text(
@@ -89,24 +87,29 @@ class _ProfilePageState extends State<ProfilePage> {
               alignment: Alignment.topCenter,
             ),
             Padding(
-              padding: EdgeInsets.all(5),
-              child: Text(
-                'Harry Potter',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5),
-            ),
+                padding: EdgeInsets.all(10),
+                child:
+                    Consumer<ProfileFormModel>(builder: (context, form, child) {
+                  return Text(
+                    '${form.userName}',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24),
+                  );
+                })),
             TextButton(
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async {
+                  var response = await Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => EditProfilePage()));
+
+                  if (response != null && response.toString().isNotEmpty) {
+                    setState(() {
+                      _formData = response.toString();
+                    });
+                  }
                 },
                 child: Text(
                   "Edit Profile",
@@ -137,7 +140,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 primary: Colors.deepPurple[600],
                 onPrimary: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+              },
               icon: Icon(
                 Icons.logout,
                 size: 18,

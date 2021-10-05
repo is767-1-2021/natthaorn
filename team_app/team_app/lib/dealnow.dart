@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:provider/provider.dart';
+import 'package:team_app/join_deal.dart';
+import 'package:team_app/model/Created_Deal_Model.dart';
 import 'create_deal.dart';
 
 class DealNow extends StatefulWidget {
@@ -10,38 +13,38 @@ class DealNow extends StatefulWidget {
 }
 
 class _DealNowState extends State<DealNow> {
-  final List<Icon> _category = <Icon>[
-    Icon(Icons.dining),
-    Icon(Icons.shopping_bag),
-    Icon(Icons.tv_sharp),
-    Icon(Icons.calendar_today),
-    Icon(Icons.calendar_today),
-  ];
+//   final List<Icon> _category = <Icon>[
+//     Icon(Icons.dining),
+//     Icon(Icons.shopping_bag),
+//     Icon(Icons.tv_sharp),
+//     Icon(Icons.calendar_today),
+//     Icon(Icons.calendar_today),
+//   ];
 
-  final List<String> _dealtitle = <String>[
-    'HOTPOT 4 BUY 3',
-    'H&M SALE 50 OFF',
-    'UltraHD Netflix',
-    'MOONCAKE S&P',
-    'MOONCAKE S&P',
-  ];
+//   final List<String> _dealtitle = <String>[
+//     'HOTPOT 4 BUY 3',
+//     'H&M SALE 50 OFF',
+//     'UltraHD Netflix',
+//     'MOONCAKE S&P',
+//     'MOONCAKE S&P',
+//   ];
 
-  final List<String> _location = <String>[
-    'Siam',
-    'Siam',
-    'none',
-    'Central World',
-    'Central World',
-  ];
-  final List<int> _numberofpeople = <int>[3, 3, 3, 3, 3];
+//   final List<String> _location = <String>[
+//     'Siam',
+//     'Siam',
+//     'none',
+//     'Central World',
+//     'Central World',
+//   ];
+//   final List<int> _numberofpeople = <int>[3, 3, 3, 3, 3];
 
-  final List<String> _dealdescription = [
-    'หารโปรมา 4 จ่าย 3 ค่ะ',
-    'หาคนกินบุฟเฟต์เป็นเพื่อนค่ะ',
-    'ตี้จัมโบ้หมูกระทะค่ะ',
-    'หารตี้ขนมไหว้พระจันทร์ค่ะ',
-    'หารตี้ขนมไหว้พระจันทร์ค่ะ',
-  ];
+//   final List<String> _dealdescription = [
+//     'หารโปรมา 4 จ่าย 3 ค่ะ',
+//     'หาคนกินบุฟเฟต์เป็นเพื่อนค่ะ',
+//     'ตี้จัมโบ้หมูกระทะค่ะ',
+//     'หารตี้ขนมไหว้พระจันทร์ค่ะ',
+//     'หารตี้ขนมไหว้พระจันทร์ค่ะ',
+//   ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,38 +66,78 @@ class _DealNowState extends State<DealNow> {
                 ]),
             Padding(padding: EdgeInsets.only(top: 15)),
             Container(
-              height: MediaQuery.of(context).size.height * 0.5,
-              child: ListView.separated(
-                padding: EdgeInsets.all(10),
-                itemCount: _dealtitle.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    tileColor: Colors.purple[50],
-                    leading: (_category[index]),
-                    title: Text(_dealtitle[index]),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(_dealdescription[index]),
-                        Wrap(
-                          spacing: 100.0,
+              padding: EdgeInsets.all(10.0),
+              child: Consumer<CreatedDealModel>(
+                builder: (context, form, child) {
+                  if (form.dealtitle == null) {
+                    return Center(child: Text('No deal right now'));
+                  } else {
+                    return ListTile(
+                        tileColor: Colors.lightBlue[100],
+                        /*if then*/
+                        leading: form.category == 'Food & Beverage'
+                            ? Icon(Icons.dining)
+                            : Icon(Icons.tv_sharp),
+                        title: Text('${form.dealtitle}'),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(_location[index]),
-                            Text(_numberofpeople[index].toString()),
+                            Text('${form.dealdescription}'),
+                            Wrap(
+                              spacing: 100.0,
+                              children: [
+                                Text('${form.location}'),
+                                Text('${form.numberofpeople}'.toString()),
+                              ],
+                            ),
                           ],
                         ),
-                      ],
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.favorite_border),
-                      onPressed: () {
-                        /*add to favorite list*/
-                      },
-                    ),
-                  );
+                        trailing: IconButton(
+                          icon: Icon(Icons.favorite_outline),
+                          onPressed: () {},
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => JoinDeal()));
+                        });
+                  }
+
+                  //   height: MediaQuery.of(context).size.height * 0.5,
+                  //   child: ListView.separated(
+                  //     padding: EdgeInsets.all(10),
+                  //     itemCount: _dealtitle.length,
+                  //     itemBuilder: (BuildContext context, int index) {
+                  //       return ListTile(
+                  //         tileColor: Colors.purple[50],
+                  //         leading: (_category[index]),
+                  //         title: Text(_dealtitle[index]),
+                  //         subtitle: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: <Widget>[
+                  //             Text(_dealdescription[index]),
+                  //             Wrap(
+                  //               spacing: 100.0,
+                  //               children: [
+                  //                 Text(_location[index]),
+                  //                 Text(_numberofpeople[index].toString()),
+                  //               ],
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         trailing: IconButton(
+                  //           icon: Icon(Icons.favorite_border),
+                  //           onPressed: () {
+                  //             /*add to favorite list*/
+                  //           },
+                  //         ),
+                  //       );
+                  //     },
+                  //     separatorBuilder: (context, index) =>
+                  //         const Divider(color: Colors.blueGrey),
+                  //   ),
                 },
-                separatorBuilder: (context, index) =>
-                    const Divider(color: Colors.blueGrey),
               ),
             ),
           ],

@@ -15,8 +15,7 @@ class HistoryDealPage extends StatelessWidget {
           backgroundColor: Colors.deepPurple.shade600,
           leading: IconButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+              Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back),
           ),

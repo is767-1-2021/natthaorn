@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:team_app/login.dart';
 import 'package:team_app/register.dart';
 
-//void main () {
-//runApp(MaterialApp(
-//  debugShowCheckedModeBanner: false,
-// home: HomePage(),
-//));
-//}
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: HomePage(),
+  ));
+}
 
 class HomePage extends StatelessWidget {
   @override
@@ -23,6 +23,14 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Text(
+                "WeDeal",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 35,
+                  color: Colors.indigo.shade900,
+                ),
+              ),
               Container(
                 height: MediaQuery.of(context).size.height / 2,
                 decoration: BoxDecoration(
@@ -37,7 +45,7 @@ class HomePage extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginPage()));
                   },
-                  color: Color(0xFFFF8E1C),
+                  color: Color(0xff8455b3),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                   child: Text(
@@ -58,7 +66,7 @@ class HomePage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => SignUpPage()));
                     },
-                    color: Color(0xFF2438BB),
+                    color: Color(0xff8455b3),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     child: Text(

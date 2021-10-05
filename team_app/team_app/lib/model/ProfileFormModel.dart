@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class ProfileFromModel extends ChangeNotifier {
-  String? _userName;
-  String? _firstName;
+class ProfileFormModel extends ChangeNotifier {
+  String? _userName = 'Somchai';
+  String? _firstName = 'Somchai';
   String? _lastName;
-  String? _dateOfBirth;
+  String? _dateOfBirth = 'October 6, 1986';
   int? _age;
   String? _gender;
   String? _email;
+  String? _changPassword;
+  String? _confirmPassword;
 
   get userName => this._userName;
 
@@ -55,6 +58,20 @@ class ProfileFromModel extends ChangeNotifier {
 
   set email(value) {
     this._email = value;
+    notifyListeners();
+  }
+
+  get changPassword => this._changPassword;
+
+  set changPassword(value) {
+    this._changPassword = value;
+    notifyListeners();
+  }
+
+  get confirmPassword => this._confirmPassword;
+
+  set confirmPassword(value) {
+    this._confirmPassword = value;
     notifyListeners();
   }
 }

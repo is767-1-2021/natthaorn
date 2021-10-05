@@ -70,8 +70,11 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // show some result based on the selection
-    return ListTile(
-      leading: Icon(Icons.dining),
+    //จริงๆ ตรงนี้ต้องเป็นหน้า ListDeal
+    return Center(
+      child: Column(
+        children: [Image.asset('image/bubble_tea.jpg'), Text('Bubble Tea')],
+      ),
     );
   }
 
