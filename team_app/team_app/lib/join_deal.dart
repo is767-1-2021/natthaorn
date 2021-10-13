@@ -14,7 +14,7 @@ class _JoinDealState extends State<JoinDeal> {
 
   void _incrementCounter() {
     setState(() {
-      if (_counter == context.read<CreatedDealModel>().numberofpeople) {
+      if (_counter == context.read<CreatedDealModel>().dealNumberofpeople) {
       } else
         _counter++;
     });
@@ -62,7 +62,7 @@ class _JoinDealState extends State<JoinDeal> {
                       child: Consumer<CreatedDealModel>(
                         builder: (context, form, child) {
                           return Text(
-                            '${form.dealtitle}',
+                            '${form.dealTitle}',
                             style: TextStyle(fontSize: 20),
                           );
                         },
@@ -105,7 +105,7 @@ class _JoinDealState extends State<JoinDeal> {
               child: Consumer<CreatedDealModel>(
                 builder: (context, form, child) {
                   return Text(
-                    '${form.dealdescription}',
+                    '${form.dealDescription}',
                     style: TextStyle(fontSize: 20),
                   );
                 },
@@ -130,7 +130,7 @@ class _JoinDealState extends State<JoinDeal> {
                       child: Consumer<CreatedDealModel>(
                         builder: (context, form, child) {
                           return Text(
-                            '${form.location}',
+                            '${form.dealLocation}',
                             style: TextStyle(fontSize: 20),
                           );
                         },
@@ -159,7 +159,7 @@ class _JoinDealState extends State<JoinDeal> {
                       child: Consumer<CreatedDealModel>(
                         builder: (context, form, child) {
                           return Text(
-                            '$_counter / ${form.numberofpeople}',
+                            '$_counter / ${form.dealNumberofpeople}',
                             style: TextStyle(fontSize: 20),
                           );
                         },
@@ -188,7 +188,7 @@ class _JoinDealState extends State<JoinDeal> {
                       child: Consumer<CreatedDealModel>(
                         builder: (context, form, child) {
                           return Text(
-                            '${form.category}',
+                            '${form.dealCategory}',
                             style: TextStyle(fontSize: 20),
                           );
                         },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'model/Created_Deal_Model.dart';
+import 'package:team_app/model/Created_Deal_Model.dart';
 
 class CreateDeal extends StatelessWidget {
   @override
@@ -68,7 +67,6 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _dealtitle = value;
             },
-            initialValue: context.read<CreatedDealModel>().dealtitle,
           ),
           SizedBox(
             height: 60,
@@ -98,7 +96,6 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _dealdescription = value;
             },
-            initialValue: context.read<CreatedDealModel>().dealdescription,
           ),
           SizedBox(
             height: 60,
@@ -129,7 +126,6 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _location = value;
             },
-            initialValue: context.read<CreatedDealModel>().location,
           ),
           SizedBox(
             height: 60,
@@ -160,7 +156,6 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _numberofpeople = int.parse(value!);
             },
-            initialValue: context.read<CreatedDealModel>().numberofpeople,
           ),
           SizedBox(
             height: 60,
@@ -234,6 +229,16 @@ class _NewDealState extends State<NewDeal> {
                       _numberofpeople;
                   context.read<CreatedDealModel>().category = _category;
 
+                  var deal = DealDB(
+                      dealtitle: context.read<CreatedDealModel>().dealtitle,
+                      dealdescription:
+                          context.read<CreatedDealModel>().dealdescription,
+                      location: context.read<CreatedDealModel>().location,
+                      numberofpeople:
+                          context.read<CreatedDealModel>().numberofpeople,
+                      category: context.read<CreatedDealModel>().category);
+
+                  context.read<CreatedDealModel>().addDeal(deal);
                   Navigator.pop(context);
                 }
               },
