@@ -12,7 +12,7 @@ class TodoController {
 
   TodoController(this.service);
 
-  Future<List<Todo>> fectTodos()async{
+  Future<List<Todo>> fectTodos() async {
     onSyncController.add(true);
     todos = await service.getTodos();
     onSyncController.add(false);

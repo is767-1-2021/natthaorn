@@ -25,6 +25,21 @@ void main() {
   );
 }
 
+class TodoApp extends StatelessWidget{
+  final TodoController controller;
+  TodoApp({required this.controller});
+
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      home: TodoPage(
+        controller: controller;
+      ),
+    );
+  }
+}
+
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

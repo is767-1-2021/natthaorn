@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TodoPage extend StatefulWidgeet{
   final TodoController Controller;
 
-  TodoPage(this.controller);
+  TodoPage({required this.controller});
 
   @override
   _TodoPageState createState()=> _TodoPageState();
