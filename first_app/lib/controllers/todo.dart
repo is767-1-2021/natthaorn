@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:first_app/model/todo.dart';
 import 'package:first_app/services/services.dart';
 
-class TodoComtroller {
+class TodoController {
   final HttpServices service;
   List<Todo> todos = List.empty();
 
