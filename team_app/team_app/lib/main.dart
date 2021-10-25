@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:team_app/edit_profile.dart';
 import 'package:team_app/firstpage.dart';
 import 'package:team_app/historyPageDeal.dart';
+import 'package:team_app/join_deal.dart';
 import 'package:team_app/login.dart';
 import 'package:team_app/model/Created_Deal_Model.dart';
 import 'package:team_app/nav.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/editProfile': (context) => EditProfilePage(),
         '/profile': (context) => ProfilePage(),
         '/historydeal': (context) => HistoryDealPage(),
+        '/joindeal': (context) => JoinDeal(),
       },
     );
   }

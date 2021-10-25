@@ -1,10 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:team_app/model/Created_Deal_Model.dart';
+import 'dealnow.dart';
 
 class JoinDeal extends StatefulWidget {
+  final DealDB? deal;
+
+  /*สร้าง key ให้กับ ๋deal ของ Joindeal*/
+  JoinDeal({Key? key, this.deal}) : super(key: key);
+
   @override
   _JoinDealState createState() => _JoinDealState();
 }
@@ -14,7 +18,7 @@ class _JoinDealState extends State<JoinDeal> {
 
   void _incrementCounter() {
     setState(() {
-      if (_counter == context.read<CreatedDealModel>().dealNumberofpeople) {
+      if (_counter == context.read<CreatedDealModel>().numberofpeople) {
       } else
         _counter++;
     });
@@ -59,13 +63,9 @@ class _JoinDealState extends State<JoinDeal> {
                     ),
                     Container(
                       alignment: Alignment.center,
-                      child: Consumer<CreatedDealModel>(
-                        builder: (context, form, child) {
-                          return Text(
-                            '${form.dealTitle}',
-                            style: TextStyle(fontSize: 20),
-                          );
-                        },
+                      child: Text(
+                        widget.deal!.dealtitle!,
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                   ],
@@ -102,13 +102,9 @@ class _JoinDealState extends State<JoinDeal> {
             Container(
               padding: EdgeInsets.all(20),
               alignment: Alignment.centerLeft,
-              child: Consumer<CreatedDealModel>(
-                builder: (context, form, child) {
-                  return Text(
-                    '${form.dealDescription}',
-                    style: TextStyle(fontSize: 20),
-                  );
-                },
+              child: Text(
+                widget.deal!.dealdescription!,
+                style: TextStyle(fontSize: 20),
               ),
             ),
             Table(
@@ -127,13 +123,9 @@ class _JoinDealState extends State<JoinDeal> {
                     Container(
                       padding: EdgeInsets.all(20),
                       alignment: Alignment.centerLeft,
-                      child: Consumer<CreatedDealModel>(
-                        builder: (context, form, child) {
-                          return Text(
-                            '${form.dealLocation}',
-                            style: TextStyle(fontSize: 20),
-                          );
-                        },
+                      child: Text(
+                        widget.deal!.location!,
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                   ],
@@ -156,14 +148,14 @@ class _JoinDealState extends State<JoinDeal> {
                     Container(
                       padding: EdgeInsets.all(20),
                       alignment: Alignment.centerLeft,
-                      child: Consumer<CreatedDealModel>(
-                        builder: (context, form, child) {
-                          return Text(
-                            '$_counter / ${form.dealNumberofpeople}',
-                            style: TextStyle(fontSize: 20),
-                          );
-                        },
-                      ),
+                      child:
+                          Text('$_counter /', style: TextStyle(fontSize: 20)),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      child: Text(widget.deal!.numberofpeople.toString(),
+                          style: TextStyle(fontSize: 20)),
                     ),
                   ],
                 ),
@@ -186,9 +178,9 @@ class _JoinDealState extends State<JoinDeal> {
                       padding: EdgeInsets.all(20),
                       alignment: Alignment.centerLeft,
                       child: Consumer<CreatedDealModel>(
-                        builder: (context, form, child) {
+                        builder: (context, value, child) {
                           return Text(
-                            '${form.dealCategory}',
+                            '${value.category}',
                             style: TextStyle(fontSize: 20),
                           );
                         },

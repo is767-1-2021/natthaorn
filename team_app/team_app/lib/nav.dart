@@ -20,7 +20,6 @@ class _NavState extends State<Nav> {
     LocationPage(),
     ProfilePage(),
     ChatPage(),
-    Searchbar(),
   ];
 
   @override
@@ -37,6 +36,7 @@ class _NavState extends State<Nav> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
+              /*ครอบด้วย Stack ที่ไอคอน ให้ซ้อน แล้วซ้อน container อีกที แล้วก็ใส่ขนาด 5+5 แต่งสี แล้วซ้อนด้วย Text แล้วเลือก position แล้วใส่ค่าด้วย allNoti*/
               backgroundColor: Colors.deepPurple[800]),
           BottomNavigationBarItem(
               icon: Icon(Icons.near_me),
@@ -49,10 +49,6 @@ class _NavState extends State<Nav> {
           BottomNavigationBarItem(
               icon: Icon(Icons.message),
               label: 'Message',
-              backgroundColor: Colors.deepPurple[800]),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
               backgroundColor: Colors.deepPurple[800]),
         ],
         onTap: (index) {

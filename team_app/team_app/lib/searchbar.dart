@@ -1,23 +1,5 @@
 import 'package:flutter/material.dart';
 
-class Searchbar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Search Deal'),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
-              })
-        ],
-      ),
-    );
-  }
-}
-
 class DataSearch extends SearchDelegate<String> {
   final keywords = [
     "Bubble Tea",
