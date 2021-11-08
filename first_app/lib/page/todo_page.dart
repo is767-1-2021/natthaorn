@@ -1,58 +1,67 @@
 import 'package:first_app/controllers/todo.dart';
-import 'pacakge:first_app/model/todo.dart';
+import 'package:first_app/model/todo.dart';
+
 import 'package:flutter/material.dart';
 
-class TodoPage extend StatefulWidgeet{
-  final TodoController Controller;
+class TodoPage extends StatefulWidget {
+  final TodoController controller;
 
   TodoPage({required this.controller});
 
   @override
-  _TodoPageState createState()=> _TodoPageState();
+  _TodoPageState createState() => _TodoPageState();
 }
 
-class _TodoPageState extends State<TodoPage>{
+class _TodoPageState extends State<TodoPage> {
   List<Todo> todos = List.empty();
   bool isLoading = false;
 
   @override
-  void iniState(){
+  void iniState() {
     super.initState();
 
-    widget.controller.onSync.listen(
-    (bool synState) => setState(()=> isLoading = synState)
-    );
+    widget.controller.onSync
+        .listen((bool synState) => setState(() => isLoading = synState));
   }
 
-void _getTodos()async{
-  var newTodos = await widget.controller.fectTodos();
+  void _getTodos() async {
+    var newTodos = await widget.controller.fectTodos();
 
-  setState((){
-    todos = newTodos;
-  });
-}
+    setState(() {
+      todos = newTodos;
+    });
+  }
 
-Widget get body => isLoading
-? CircularProgressIndicator()
-: ListView.builder(
-  itemCount: todos.isEmpty ? 1 : todos.length,
-  itemBuilder: (context,index){
-    if (todos.isEmpty){
-      return Text("Tap Button to fetch Todos");
-    }
+  void _updateTodos(int id, bool completed) async {
+    await widget.controller.updateTodos(id, completed);
+  }
 
-    return CheckboxListTile(
-      onChanged: null,
-      value: todos[index].completed,
-      title: Text(todos[index].title),
-    );
-  },
-);
+  Widget get body => isLoading
+      ? CircularProgressIndicator()
+      : ListView.builder(
+          itemCount: todos.isEmpty ? 1 : todos.length,
+          itemBuilder: (context, index) {
+            if (todos.isEmpty) {
+              return Text("Tap Button to fetch Todos");
+            }
 
-@override
-  Widget build(BuildContext context){
+            return CheckboxListTile(
+              onChanged: (bool? completed) {
+                setState(() {
+                  todos[index].completed = completed!;
+                  _updateTodos(todos[index].id, completed);
+                });
+              },
+              value: todos[index].completed,
+              title: Text(todos[index].title),
+            );
+          },
+        );
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         title: Text('HTTP Todos'),
       ),
       body: Center(

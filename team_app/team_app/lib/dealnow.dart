@@ -162,44 +162,6 @@ class _DealNowState extends State<DealNow> {
                                       ),
                                     ),
                                   );
-
-                                  // return Card(
-                                  //   color: Colors.deepPurple[100],
-                                  //   child: Column(
-                                  //     // children: [
-                                  //     //   // ListTile(
-                                  //     //   //   leading: Icon(Icons.dining, size: 40.0),
-                                  //     //   //   title: Text(deal.dealtitle!,
-                                  //     //   //       style: TextStyle(
-                                  //     //   //           fontWeight: FontWeight.bold,
-                                  //     //   //           fontSize: 24.0)),
-                                  //     //   //   subtitle: Column(
-                                  //     //   //     children: [
-                                  //     //   //       Text(deal.dealdescription!,
-                                  //     //   //           style: TextStyle(fontSize: 18.0)),
-                                  //     //   //       Wrap(
-                                  //     //   //         spacing: 100.0,
-                                  //     //   //         children: [
-                                  //     //   //           Text(
-                                  //     //   //             deal.location!,
-                                  //     //   //             style: TextStyle(fontSize: 15.0),
-                                  //     //   //           ),
-                                  //     //   //           Text(deal.numberofpeople.toString(),
-                                  //     //   //               style: TextStyle(fontSize: 15.0)),
-                                  //     //   //         ],
-                                  //     //   //       ),
-                                  //     //   //     ],
-                                  //     //   //   ),
-                                  //     //   //   trailing: Icon(Icons.favorite_border),
-                                  //     //   //   onTap: Navigator.push(
-                                  //     //   //     context,
-                                  //     //   //     MaterialPageRoute(
-                                  //     //   //         builder: (context) => JoinDeal(deal)),
-                                  //     //   //   ),
-                                  //     //   // ),
-                                  //     // ],
-                                  //   ),
-                                  // );
                                 },
                               ),
                             ),

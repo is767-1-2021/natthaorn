@@ -43,6 +43,7 @@ dependencies:
   location: ^4.3.0
   url_launcher: ^6.0.10
   url_launcher_web: ^2.0.4
+  badges: ^2.0.1
 
 dev_dependencies:
   flutter_test:

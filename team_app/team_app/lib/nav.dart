@@ -1,8 +1,8 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:team_app/chatpage.dart';
 import 'package:team_app/dealnow.dart';
 import 'package:team_app/profile.dart';
-import 'package:team_app/searchbar.dart';
 import 'package:team_app/around_you.dart';
 
 class Nav extends StatefulWidget {
@@ -14,6 +14,8 @@ class Nav extends StatefulWidget {
 
 class _NavState extends State<Nav> {
   int _selectedIndex = 0;
+  int dealNoti = 3;
+
   final tabs = [
     /*ปลั๊กหน้า เหมือน routing*/
     DealNow(),
@@ -28,28 +30,32 @@ class _NavState extends State<Nav> {
       body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        type: BottomNavigationBarType.shifting,
-        backgroundColor: Colors.grey[300],
         iconSize: 30.0,
         selectedFontSize: 14.0,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              /*ครอบด้วย Stack ที่ไอคอน ให้ซ้อน แล้วซ้อน container อีกที แล้วก็ใส่ขนาด 5+5 แต่งสี แล้วซ้อนด้วย Text แล้วเลือก position แล้วใส่ค่าด้วย allNoti*/
-              backgroundColor: Colors.deepPurple[800]),
+            icon: buildCustomBadge(
+              counter: dealNoti,
+              child: Icon(Icons.home),
+            ),
+            label: 'Home',
+            backgroundColor: Colors.deepPurple[900],
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.near_me),
-              label: 'Around You',
-              backgroundColor: Colors.deepPurple[800]),
+            icon: Icon(Icons.near_me),
+            label: 'Around You',
+            backgroundColor: Colors.deepPurple[900],
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-              backgroundColor: Colors.deepPurple[800]),
+            icon: Icon(Icons.person),
+            label: 'Profile',
+            backgroundColor: Colors.deepPurple[900],
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.message),
-              label: 'Message',
-              backgroundColor: Colors.deepPurple[800]),
+            icon: Icon(Icons.message),
+            label: 'Message',
+            backgroundColor: Colors.deepPurple[900],
+          ),
         ],
         onTap: (index) {
           setState(() {
@@ -57,6 +63,30 @@ class _NavState extends State<Nav> {
           });
         },
       ),
+    );
+  }
+
+  Widget buildCustomBadge({required int counter, required Icon child}) {
+    final text = counter.toString();
+
+    return Stack(
+      children: [
+        child,
+        Positioned(
+          top: -3,
+          right: -2,
+          child: CircleAvatar(
+            backgroundColor: Colors.red[600],
+            radius: 10,
+            child: Text(
+              text,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
