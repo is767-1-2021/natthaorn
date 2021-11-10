@@ -1,12 +1,14 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:team_app/chatpage.dart';
-import 'package:team_app/dealnow.dart';
+import 'package:team_app/controllers/deal_controller.dart';
+import 'package:team_app/deal_page.dart';
 import 'package:team_app/profile.dart';
 import 'package:team_app/around_you.dart';
 
 class Nav extends StatefulWidget {
-  const Nav({Key? key}) : super(key: key);
+  final DealController controller;
+  const Nav({Key? key, required this.controller}) : super(key: key);
 
   @override
   _NavState createState() => _NavState();
@@ -18,11 +20,15 @@ class _NavState extends State<Nav> {
 
   final tabs = [
     /*ปลั๊กหน้า เหมือน routing*/
-    DealNow(),
+    DealPage(
+      controller: controller,
+    ),
     LocationPage(),
     ProfilePage(),
     ChatPage(),
   ];
+
+  static var controller;
 
   @override
   Widget build(BuildContext context) {

@@ -202,8 +202,13 @@ class _MyCustomFormState extends State<MyCustomForm> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                           }
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Nav()));
+                          var controller;
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Nav(
+                                        controller: controller,
+                                      )));
                         }),
                   ),
                   SizedBox(height: 10),

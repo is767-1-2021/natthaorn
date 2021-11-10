@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:team_app/model/Created_Deal_Model.dart';
-import 'dealnow.dart';
+import 'package:team_app/deal_page.dart';
+import 'model/deal_model.dart';
 
 class JoinDeal extends StatefulWidget {
-  final DealDB? deal;
+  final Deal ds;
 
   /*สร้าง key ให้กับ ๋deal ของ Joindeal*/
-  JoinDeal({Key? key, this.deal}) : super(key: key);
+  JoinDeal({Key? key, required this.ds}) : super(key: key);
 
   @override
   _JoinDealState createState() => _JoinDealState();
@@ -18,9 +18,11 @@ class _JoinDealState extends State<JoinDeal> {
 
   void _incrementCounter() {
     setState(() {
-      if (_counter == context.read<CreatedDealModel>().numberofpeople) {
-      } else
-        _counter++;
+      if (_counter < widget.ds.member) {
+        _counter += 1;
+      } else {
+        _counter += 0;
+      }
     });
   }
 
@@ -64,7 +66,7 @@ class _JoinDealState extends State<JoinDeal> {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        widget.deal!.dealtitle!,
+                        widget.ds.title,
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -103,7 +105,7 @@ class _JoinDealState extends State<JoinDeal> {
               padding: EdgeInsets.all(20),
               alignment: Alignment.centerLeft,
               child: Text(
-                widget.deal!.dealdescription!,
+                widget.ds.caption,
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -124,7 +126,7 @@ class _JoinDealState extends State<JoinDeal> {
                       padding: EdgeInsets.all(20),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        widget.deal!.location!,
+                        widget.ds.place,
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -154,42 +156,42 @@ class _JoinDealState extends State<JoinDeal> {
                     Container(
                       padding: EdgeInsets.all(20),
                       alignment: Alignment.centerLeft,
-                      child: Text(widget.deal!.numberofpeople.toString(),
+                      child: Text(widget.ds.member.toString(),
                           style: TextStyle(fontSize: 20)),
                     ),
                   ],
                 ),
               ],
             ),
-            Table(
-              children: [
-                TableRow(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Category',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      alignment: Alignment.centerLeft,
-                      child: Consumer<CreatedDealModel>(
-                        builder: (context, value, child) {
-                          return Text(
-                            '${value.category}',
-                            style: TextStyle(fontSize: 20),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            // Table(
+            //   children: [
+            //     TableRow(
+            //       children: <Widget>[
+            //         Container(
+            //           padding: EdgeInsets.all(20),
+            //           alignment: Alignment.centerLeft,
+            //           child: Text(
+            //             'Category',
+            //             style: TextStyle(
+            //                 fontSize: 18, fontWeight: FontWeight.bold),
+            //           ),
+            //         ),
+            //         Container(
+            //           padding: EdgeInsets.all(20),
+            //           alignment: Alignment.centerLeft,
+            //           child: Consumer<CreatedDealModel>(
+            //             builder: (context, value, child) {
+            //               return Text(
+            //                 '${value.category}',
+            //                 style: TextStyle(fontSize: 20),
+            //               );
+            //             },
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
