@@ -4,7 +4,6 @@ import 'package:team_app/firstpage.dart';
 import 'package:team_app/historyPageDeal.dart';
 import 'package:team_app/join_deal.dart';
 import 'package:team_app/login.dart';
-import 'package:team_app/model/Created_Deal_Model.dart';
 import 'package:team_app/nav.dart';
 import 'package:provider/provider.dart';
 import 'package:team_app/services/deal_services.dart';
@@ -26,9 +25,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => ProfileFormModel(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => CreatedDealModel(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => CreatedDealModel(),
+        // ),
       ],
       child: DealApp(
         controller: controller,

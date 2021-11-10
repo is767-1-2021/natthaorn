@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:team_app/model/Created_Deal_Model.dart';
+import 'package:team_app/controllers/deal_controller.dart';
+import 'package:team_app/model/deal_model.dart';
+import 'package:team_app/services/deal_services.dart';
 
 class CreateDeal extends StatelessWidget {
+  // final DocumentSnapshot? dealData;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +29,16 @@ class NewDeal extends StatefulWidget {
 
 class _NewDealState extends State<NewDeal> {
   final _dealdetail = GlobalKey<FormState>();
-  String? _dealtitle;
-  String? _dealdescription;
-  String? _location;
-  int? _numberofpeople;
+  String? _title;
+  String? _caption;
+  String? _place;
+  int? _member;
   String? _category;
+  DateTime? _createdDateTime;
+  String? _uid;
+  String? _createdUser;
+  bool? isClosed;
+
   final items = [
     'Food & Beverage',
     'Entertainment',
@@ -65,7 +75,7 @@ class _NewDealState extends State<NewDeal> {
               return null;
             },
             onSaved: (value) {
-              _dealtitle = value;
+              _title = value;
             },
           ),
           SizedBox(
@@ -94,7 +104,7 @@ class _NewDealState extends State<NewDeal> {
               return null;
             },
             onSaved: (value) {
-              _dealdescription = value;
+              _caption = value;
             },
           ),
           SizedBox(
@@ -124,7 +134,7 @@ class _NewDealState extends State<NewDeal> {
               return null;
             },
             onSaved: (value) {
-              _location = value;
+              _place = value;
             },
           ),
           SizedBox(
@@ -154,9 +164,71 @@ class _NewDealState extends State<NewDeal> {
               }
             },
             onSaved: (value) {
-              _numberofpeople = int.parse(value!);
+              _member = int.parse(value!);
             },
           ),
+          SizedBox(
+            height: 60,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'created Deal Date',
+                style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.purple[900],
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          /*ใส่วันที่สร้างดีล เป็นปฏิทินได้ไหม*/
+          // TextFormField(
+          //   decoration: InputDecoration(
+          //       border: OutlineInputBorder(),
+          //       labelText: 'How many people you are looking for...'),
+          //   validator: (value) {
+          //     if (value == null || value.isEmpty) {
+          //       return 'Please enter number of people.';
+          //     }
+
+          //     if (int.parse(value) < 0) {
+          //       return 'Number not valid';
+          //     }
+          //   },
+          //   onSaved: (value) {
+          //     _member = int.parse(value!);
+          //   },
+          // ),
+          SizedBox(
+            height: 60,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Deal Owner',
+                style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.purple[900],
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          /*ใส่เจ้าของดีล ต้องดึงจาก account หรือว่ากรอกไปก่อน*/
+          // TextFormField(
+          //   decoration: InputDecoration(
+          //       border: OutlineInputBorder(),
+          //       labelText: 'How many people you are looking for...'),
+          //   validator: (value) {
+          //     if (value == null || value.isEmpty) {
+          //       return 'Please enter number of people.';
+          //     }
+
+          //     if (int.parse(value) < 0) {
+          //       return 'Number not valid';
+          //     }
+          //   },
+          //   onSaved: (value) {
+          //     _member = int.parse(value!);
+          //   },
+          // ),
           SizedBox(
             height: 60,
             child: Align(
@@ -217,28 +289,27 @@ class _NewDealState extends State<NewDeal> {
             height: 55,
             width: 300,
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                var services = FirebaseServices();
+                var controller = DealController(services);
+
                 if (_dealdetail.currentState!.validate()) {
                   _dealdetail.currentState!.save();
 
-                  context.read<CreatedDealModel>().dealtitle = _dealtitle;
-                  context.read<CreatedDealModel>().dealdescription =
-                      _dealdescription;
-                  context.read<CreatedDealModel>().location = _location;
-                  context.read<CreatedDealModel>().numberofpeople =
-                      _numberofpeople;
-                  context.read<CreatedDealModel>().category = _category;
-
-                  var deal = DealDB(
-                      dealtitle: context.read<CreatedDealModel>().dealtitle,
-                      dealdescription:
-                          context.read<CreatedDealModel>().dealdescription,
-                      location: context.read<CreatedDealModel>().location,
-                      numberofpeople:
-                          context.read<CreatedDealModel>().numberofpeople,
-                      category: context.read<CreatedDealModel>().category);
-
-                  context.read<CreatedDealModel>().addDeal(deal);
+                  DocumentReference docRef = await FirebaseFirestore.instance
+                      .collection('group_deal')
+                      .add({
+                    'createdUser': _createdUser,
+                    'createdDateTime': _createdDateTime,
+                    'title': _title,
+                    'category': _category,
+                    'caption': _caption,
+                    'place': _place,
+                    'member': _member,
+                    'uid': _uid,
+                    'isClosed': false
+                  });
+                  /*ใส่ function addDeal*/
                   Navigator.pop(context);
                 }
               },
