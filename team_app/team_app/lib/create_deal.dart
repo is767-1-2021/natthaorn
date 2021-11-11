@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -310,6 +312,9 @@ class _NewDealState extends State<NewDeal> {
                     'isClosed': false
                   });
                   /*ใส่ function addDeal*/
+
+                  Service ds = Service();
+                  // ds.addDeal(docRef);
                   Navigator.pop(context);
                 }
               },
