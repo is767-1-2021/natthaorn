@@ -225,6 +225,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                             textStyle: const TextStyle(
                                 fontSize: 16, color: Colors.deepPurple)),
                         onPressed: () {
+                          /*เขียนคล้ายๆ addDeal เป็น collection group_user*/
                           Navigator.push(
                               context,
                               MaterialPageRoute(

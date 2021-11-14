@@ -35,3 +35,5 @@ class FirebaseServices extends Services {
     return ref.id;
   }
 }
+/*สร้าง Firebase.auth.instance.add >เรียกให้ใส่ email password*/ 
+/*เขียน firebasefirestore เพื่อ add เอา auth ไปใส่เป็น collection user*/

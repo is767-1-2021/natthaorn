@@ -5,8 +5,11 @@ import 'package:team_app/model/deal_model.dart';
 
 import 'package:flutter/material.dart';
 
+import 'around_you.dart';
+import 'chatpage.dart';
 import 'create_deal.dart';
 import 'join_deal.dart';
+import 'profile.dart';
 
 class DealPage extends StatefulWidget {
   final DealController controller;
@@ -22,6 +25,7 @@ class DealPage extends StatefulWidget {
 class _DealPageState extends State<DealPage> {
   List<Deal> deals = List.empty();
   bool isLoading = false;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -198,6 +202,7 @@ class _DealPageState extends State<DealPage> {
         appBar: AppBar(
           title: Text('Home'),
         ),
+        //drawer: Drawer(child:)
         body: Center(
           child: body,
         ),

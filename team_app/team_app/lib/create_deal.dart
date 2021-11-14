@@ -7,6 +7,8 @@ import 'package:team_app/controllers/deal_controller.dart';
 import 'package:team_app/model/deal_model.dart';
 import 'package:team_app/services/deal_services.dart';
 
+import 'deal_page.dart';
+
 class CreateDeal extends StatelessWidget {
   // final DocumentSnapshot? dealData;
 
@@ -36,7 +38,7 @@ class _NewDealState extends State<NewDeal> {
   String? _place;
   int? _member;
   String? _category;
-  DateTime? _createdDateTime;
+  DateTime? _createdDateTime = DateTime.now(); /*stamp เวลา ณ ตอนนี้*/
   String? _uid;
   String? _createdUser;
   bool? isClosed;
@@ -298,10 +300,10 @@ class _NewDealState extends State<NewDeal> {
                 if (_dealdetail.currentState!.validate()) {
                   _dealdetail.currentState!.save();
 
-                  DocumentReference docRef = await FirebaseFirestore.instance
-                      .collection('group_deal')
+                  await FirebaseFirestore.instance
+                      .collection('group_deals')
                       .add({
-                    'createdUser': _createdUser,
+                    'createdUser': 'abc',
                     'createdDateTime': _createdDateTime,
                     'title': _title,
                     'category': _category,
@@ -312,10 +314,14 @@ class _NewDealState extends State<NewDeal> {
                     'isClosed': false
                   });
                   /*ใส่ function addDeal*/
-
-                  Service ds = Service();
-                  // ds.addDeal(docRef);
+                  /*ใส่ snackbar โชว์ว่าอัพเดทไปแล้ว*/
+                  /*pushReplacement ให้ใส่หน้าใหม่เข้ามาแทน+รีเฟรชด้วย แทนหน้าเดิม*/
                   Navigator.pop(context);
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              DealPage(controller: controller)));
                 }
               },
               child: Text(

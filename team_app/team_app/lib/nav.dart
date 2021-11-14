@@ -20,15 +20,13 @@ class _NavState extends State<Nav> {
 
   final tabs = [
     /*ปลั๊กหน้า เหมือน routing*/
-    DealPage(
-      controller: controller,
-    ),
+    // DealPage(
+    //   controller: controller,
+    // ),
     LocationPage(),
     ProfilePage(),
     ChatPage(),
   ];
-
-  static var controller;
 
   @override
   Widget build(BuildContext context) {
