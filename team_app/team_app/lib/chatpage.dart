@@ -168,6 +168,11 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: () {
+          Navigator.pop(context);
+        }),
+      ),
       body: SafeArea(
         bottom: false,
         child: Chat(

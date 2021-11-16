@@ -30,7 +30,8 @@ class _LocationPageState extends State<LocationPage> {
       appBar: AppBar(
           leading: BackButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/Nav');
+              Navigator.pop(context);
+              /*ใส่ Navigation หน้าา DealPage ไม่ได้เพราะต้องการ controller*/
             },
           ),
           title: const Text('Location', style: TextStyle(color: Colors.white)),

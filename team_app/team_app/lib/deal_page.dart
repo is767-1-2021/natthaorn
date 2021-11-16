@@ -1,22 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:ui';
+
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:team_app/chatpage.dart';
 import 'package:team_app/controllers/deal_controller.dart';
 import 'package:team_app/model/deal_model.dart';
-
 import 'package:flutter/material.dart';
-
+import 'package:team_app/profile.dart';
 import 'around_you.dart';
-import 'chatpage.dart';
 import 'create_deal.dart';
 import 'join_deal.dart';
-import 'profile.dart';
 
 class DealPage extends StatefulWidget {
   final DealController controller;
   // CollectionReference deal =
   //     FirebaseFirestore.instance.collection('group_deals');
 
-  DealPage({required this.controller});
+  DealPage({Key? key, required this.controller}) : super(key: key);
 
   @override
   _DealPageState createState() => _DealPageState();
@@ -25,7 +24,6 @@ class DealPage extends StatefulWidget {
 class _DealPageState extends State<DealPage> {
   List<Deal> deals = List.empty();
   bool isLoading = false;
-  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -202,7 +200,49 @@ class _DealPageState extends State<DealPage> {
         appBar: AppBar(
           title: Text('Home'),
         ),
-        //drawer: Drawer(child:)
+        drawer: Drawer(
+            child: ListView(
+          padding: EdgeInsets.all(0.5),
+          children: [
+            DrawerHeader(
+                decoration: BoxDecoration(color: Colors.deepPurple),
+                child: Text('WeDeal Menu',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold))),
+            ListTile(
+              title: Text('Around You',
+                  style:
+                      TextStyle(color: Colors.deepPurple[900], fontSize: 15)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LocationPage()));
+              },
+              trailing: Icon(Icons.location_on),
+            ),
+            ListTile(
+              title: Text('Profile',
+                  style:
+                      TextStyle(color: Colors.deepPurple[900], fontSize: 15)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
+              },
+              trailing: Icon(Icons.person_pin_rounded),
+            ),
+            ListTile(
+              title: Text('Chats',
+                  style:
+                      TextStyle(color: Colors.deepPurple[900], fontSize: 15)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ChatPage()));
+              },
+              trailing: Icon(Icons.chat_outlined),
+            ),
+          ],
+        )),
         body: Center(
           child: body,
         ),

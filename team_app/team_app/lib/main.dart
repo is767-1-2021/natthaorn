@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:team_app/services/deal_services.dart';
 import 'controllers/deal_controller.dart';
 import 'deal_page.dart';
-import 'model/ProfileFormModel.dart';
+import 'model/user_model.dart';
 import 'profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -20,18 +20,9 @@ void main() async {
   var services = FirebaseServices();
   var controller = DealController(services);
 
-  runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ProfileFormModel(),
-        ),
-        // ChangeNotifierProvider(
-        //   create: (context) => CreatedDealModel(),
-        // ),
-      ],
-      child: DealApp(
-        controller: controller,
-      )));
+  runApp(DealApp(
+    controller: controller,
+  ));
 }
 
 class DealApp extends StatelessWidget {
@@ -41,9 +32,26 @@ class DealApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DealPage(
-        controller: controller,
-      ),
+      theme: ThemeData(
+          primaryColor: Colors.deepPurple[700],
+          fontFamily: 'IBM Plex Sans Thai'),
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/login',
+      // home: DealPage(
+      //   controller: controller,
+      // ),
+      routes: <String, WidgetBuilder>{
+        '/login': (context) => LoginPage(),
+        '/home': (context) => HomePage(),
+        '/Nav': (context) => Nav(
+              controller: controller,
+            ),
+        // '/editProfile': (context) => EditProfilePage(),
+        '/profile': (context) => ProfilePage(),
+        '/historydeal': (context) => HistoryDealPage(),
+        // '/joindeal': (context) => JoinDeal(ds: ds),
+        '/DealPage': (context) => DealPage(controller: controller)
+      },
     );
   }
 }
@@ -51,25 +59,10 @@ class DealApp extends StatelessWidget {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var controller;
     return MaterialApp(
-      theme: ThemeData(
-          primaryColor: Colors.deepPurple[700],
-          fontFamily: 'IBM Plex Sans Thai'),
       debugShowCheckedModeBanner: false,
       // home: HomePage(),
       initialRoute: '/Nav',
-      routes: <String, WidgetBuilder>{
-        '/login': (context) => LoginPage(),
-        '/home': (context) => HomePage(),
-        '/Nav': (context) => Nav(
-              controller: controller,
-            ),
-        '/editProfile': (context) => EditProfilePage(),
-        '/profile': (context) => ProfilePage(),
-        '/historydeal': (context) => HistoryDealPage(),
-        // '/joindeal': (context) => JoinDeal(ds: ds),
-      },
     );
   }
 }

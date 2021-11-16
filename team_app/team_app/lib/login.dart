@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:team_app/controllers/deal_controller.dart';
+import 'package:team_app/deal_page.dart';
 import 'package:team_app/register.dart';
+import 'package:team_app/services/deal_services.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'nav.dart';
 
@@ -142,17 +147,52 @@ class _MyCustomFormState extends State<MyCustomForm> {
                             style: TextStyle(
                               fontSize: 20,
                             )),
-                        onPressed: () {
+                        onPressed: () async {
+                          var services = FirebaseServices();
+                          var controller = DealController(services);
+
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
+
+                            /*check email ถ้าไม่มีใน database ให้ฟ้อง*/
+                            if (!EmailValidator.validate(_email!)) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          'Please input the valid Email')));
+                            }
+
+                            try {
+                              await FirebaseAuth.instance
+                                  .signInWithEmailAndPassword(
+                                      email: _email!, password: _password!)
+                                  .then((value) {
+                                /*ถ้าเช็คเมล์กับพาสเวิร์ดแล้ว ให้มันไปรีเซตค่าในฟอร์ม*/
+                                _formKey.currentState!.reset();
+                                /*login สำเร็จ*/
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DealPage(
+                                              controller: controller,
+                                            )));
+                              });
+                              /*e = error try on catch เป็นการแจ้งว่ามี exit route เดิมไปแล้ว*/
+                              /*เป็น default code*/
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code == 'user-not-found') {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            'No user found for This Email')));
+                              } else if (e.code == 'wrong-password') {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            'Email or password is incorrect')));
+                              }
+                            }
                           }
-                          var controller;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Nav(
-                                        controller: controller,
-                                      )));
                         })),
                 Container(
                   child: Row(
