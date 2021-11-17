@@ -18,45 +18,52 @@ class _NavState extends State<Nav> {
   int _selectedIndex = 0;
   int dealNoti = 3;
 
-  final tabs = [
-    /*ปลั๊กหน้า เหมือน routing*/
-    // DealPage(
-    //   controller: controller,
-    // ),
-    LocationPage(),
-    ProfilePage(),
-    ChatPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         iconSize: 30.0,
         selectedFontSize: 14.0,
         items: [
           BottomNavigationBarItem(
-            icon: buildCustomBadge(
-              counter: dealNoti,
+            icon: InkWell(
               child: Icon(Icons.home),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DealPage()));
+              },
             ),
             label: 'Home',
             backgroundColor: Colors.deepPurple[900],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.near_me),
+            icon: InkWell(
+                child: Icon(Icons.near_me),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LocationPage()));
+                }),
             label: 'Around You',
             backgroundColor: Colors.deepPurple[900],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: InkWell(
+                child: Icon(Icons.person),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                }),
             label: 'Profile',
             backgroundColor: Colors.deepPurple[900],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
+            icon: InkWell(
+                child: Icon(Icons.message),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ChatPage()));
+                }),
             label: 'Message',
             backgroundColor: Colors.deepPurple[900],
           ),

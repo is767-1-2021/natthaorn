@@ -5,18 +5,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:team_app/deal_page.dart';
+import 'package:team_app/nav.dart';
+import 'package:team_app/profile.dart';
+import 'package:team_app/services/deal_services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'chatpage.dart';
+import 'controllers/deal_controller.dart';
+
 class LocationPage extends StatefulWidget {
-  const LocationPage({Key? key}) : super(key: key);
+  LocationPage({Key? key}) : super(key: key);
+  var controller;
+  var service = FirebaseServices();
+
+  DealPage() {
+    controller = DealController(service);
+  }
 
   @override
-  _LocationPageState createState() => _LocationPageState();
+  _LocationPageState createState() => _LocationPageState(this.controller);
 }
 
 class _LocationPageState extends State<LocationPage> {
   final Completer<GoogleMapController> _controller = Completer();
   late LocationData currentLocation;
+  int _selectedIndex = 0;
+
+  var controller;
+
+  _LocationPageState(this.controller);
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(13.74700, 100.53906),
@@ -28,12 +46,6 @@ class _LocationPageState extends State<LocationPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          leading: BackButton(
-            onPressed: () {
-              Navigator.pop(context);
-              /*ใส่ Navigation หน้าา DealPage ไม่ได้เพราะต้องการ controller*/
-            },
-          ),
           title: const Text('Location', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.deepPurple.shade600,
           actions: [
@@ -120,6 +132,58 @@ class _LocationPageState extends State<LocationPage> {
         icon: const Icon(Icons.pin_drop_outlined),
         //backgroundColor: Colors.teal.withOpacity(0.95),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: _selectedIndex,
+        iconSize: 30.0,
+        selectedFontSize: 14.0,
+        items: [
+          BottomNavigationBarItem(
+            icon: InkWell(
+              child: Icon(Icons.home),
+              onTap: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => DealPage()));
+              },
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: InkWell(
+                child: Icon(Icons.near_me),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => LocationPage()));
+                }),
+            label: 'Around You',
+          ),
+          BottomNavigationBarItem(
+            icon: InkWell(
+                child: Icon(Icons.person),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                }),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: InkWell(
+                child: Icon(Icons.message),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ChatPage()));
+                }),
+            label: 'Message',
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
     );
   }
 
@@ -140,7 +204,8 @@ class Moved1 extends StatelessWidget {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          Navigator.pop(context);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => DealPage()));
         },
         child: Center(
           child: Hero(

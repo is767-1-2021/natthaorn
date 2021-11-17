@@ -33,10 +33,10 @@ class DealApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primaryColor: Colors.deepPurple[700],
+          primaryColor: Colors.deepPurple[900],
           fontFamily: 'IBM Plex Sans Thai'),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/DealPage',
       // home: DealPage(
       //   controller: controller,
       // ),
@@ -50,7 +50,7 @@ class DealApp extends StatelessWidget {
         '/profile': (context) => ProfilePage(),
         '/historydeal': (context) => HistoryDealPage(),
         // '/joindeal': (context) => JoinDeal(ds: ds),
-        '/DealPage': (context) => DealPage(controller: controller)
+        '/DealPage': (context) => DealPage(),
       },
     );
   }

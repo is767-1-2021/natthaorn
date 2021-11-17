@@ -18,6 +18,7 @@ class _JoinDealState extends State<JoinDeal> {
 
   void _incrementCounter() {
     setState(() {
+      /*กดได้ครั้งเดียว*/
       if (_counter < widget.ds.member) {
         _counter += 1;
       } else {
@@ -66,7 +67,7 @@ class _JoinDealState extends State<JoinDeal> {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        widget.ds.title,
+                        widget.ds.caption,
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -105,7 +106,7 @@ class _JoinDealState extends State<JoinDeal> {
               padding: EdgeInsets.all(20),
               alignment: Alignment.centerLeft,
               child: Text(
-                widget.ds.caption,
+                widget.ds.title,
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -198,6 +199,7 @@ class _JoinDealState extends State<JoinDeal> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           _incrementCounter();
+
           // Navigator.pop(context);
         },
         child: Text('Join'),

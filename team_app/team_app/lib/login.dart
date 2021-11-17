@@ -173,9 +173,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DealPage(
-                                              controller: controller,
-                                            )));
+                                        builder: (context) => DealPage()));
                               });
                               /*e = error try on catch เป็นการแจ้งว่ามี exit route เดิมไปแล้ว*/
                               /*เป็น default code*/

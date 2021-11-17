@@ -302,11 +302,8 @@ class _NewDealState extends State<NewDeal> {
                   // ScaffoldMessenger.of(context).showSnackBar(context: )
                   /*pushReplacement ให้ใส่หน้าใหม่เข้ามาแทน+รีเฟรชด้วย แทนหน้าเดิม*/
                   Navigator.pop(context);
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              DealPage(controller: controller)));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => DealPage()));
                 }
               },
               child: Text(

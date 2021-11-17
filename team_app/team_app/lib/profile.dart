@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'around_you.dart';
+import 'chatpage.dart';
+import 'controllers/deal_controller.dart';
+import 'deal_page.dart';
 import 'model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'services/deal_services.dart';
 
 // var assetImage = AssetImage('image/profile.png');
 // var image = Image(
@@ -10,13 +16,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // );
 
 class ProfilePage extends StatefulWidget {
+  var controller;
+  var service = FirebaseServices();
+
+  DealPage() {
+    controller = DealController(service);
+  }
+
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _ProfilePageState createState() => _ProfilePageState(this.controller);
 }
 
 class _ProfilePageState extends State<ProfilePage> {
   String? _formData = 'Please enter username';
   // final UserData users;
+  int _selectedIndex = 0;
+
+  var controller;
+
+  _ProfilePageState(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +59,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
           return Scaffold(
             appBar: AppBar(
-              leading: BackButton(onPressed: () {
-                Navigator.pop(context);
-              }),
               centerTitle: true,
               backgroundColor: Colors.deepPurple[600],
               title: Text(
@@ -326,6 +341,64 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ]),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              currentIndex: _selectedIndex,
+              iconSize: 30.0,
+              selectedFontSize: 14.0,
+              items: [
+                BottomNavigationBarItem(
+                  icon: InkWell(
+                    child: Icon(Icons.home),
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => DealPage()));
+                    },
+                  ),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: InkWell(
+                      child: Icon(Icons.near_me),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LocationPage()));
+                      }),
+                  label: 'Around You',
+                ),
+                BottomNavigationBarItem(
+                  icon: InkWell(
+                      child: Icon(Icons.person),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()));
+                      }),
+                  label: 'Profile',
+                ),
+                BottomNavigationBarItem(
+                  icon: InkWell(
+                      child: Icon(Icons.message),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChatPage()));
+                      }),
+                  label: 'Message',
+                ),
+              ],
+              onTap: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
             ),
           );
         });
