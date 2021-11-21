@@ -1,6 +1,5 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:team_app/chatpage.dart';
+
 import 'package:team_app/controllers/deal_controller.dart';
 import 'package:team_app/deal_page.dart';
 import 'package:team_app/profile.dart';
@@ -58,12 +57,7 @@ class _NavState extends State<Nav> {
             backgroundColor: Colors.deepPurple[900],
           ),
           BottomNavigationBarItem(
-            icon: InkWell(
-                child: Icon(Icons.message),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ChatPage()));
-                }),
+            icon: InkWell(child: Icon(Icons.message), onTap: () {}),
             label: 'Message',
             backgroundColor: Colors.deepPurple[900],
           ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'around_you.dart';
-import 'chatpage.dart';
 import 'controllers/deal_controller.dart';
 import 'deal_page.dart';
 import 'model/user_model.dart';
@@ -383,14 +382,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   label: 'Profile',
                 ),
                 BottomNavigationBarItem(
-                  icon: InkWell(
-                      child: Icon(Icons.message),
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChatPage()));
-                      }),
+                  icon: InkWell(child: Icon(Icons.message), onTap: () {}),
                   label: 'Message',
                 ),
               ],

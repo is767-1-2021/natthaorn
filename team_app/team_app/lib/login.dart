@@ -6,8 +6,6 @@ import 'package:team_app/services/deal_services.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'nav.dart';
-
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

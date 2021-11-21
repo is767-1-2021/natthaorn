@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:team_app/login.dart';
 import 'package:team_app/register.dart';
+import 'package:team_app/screens/login_screen.dart';
+import 'package:team_app/screens/signup_screen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -43,7 +45,7 @@ class HomePage extends StatelessWidget {
                   height: 60,
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
                   color: Color(0xff8455b3),
                   shape: RoundedRectangleBorder(
@@ -64,7 +66,7 @@ class HomePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignUpPage()));
+                              builder: (context) => SignUpScreen()));
                     },
                     color: Color(0xff8455b3),
                     shape: RoundedRectangleBorder(

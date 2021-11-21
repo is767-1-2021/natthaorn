@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:team_app/chatpage.dart';
 import 'package:team_app/controllers/deal_controller.dart';
 import 'package:team_app/model/deal_model.dart';
 import 'package:flutter/material.dart';
@@ -97,8 +96,16 @@ class _DealPageState extends State<DealPage> {
       //   )),
       backgroundColor: Colors.deepPurple[900],
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Enjoy with the best Deal!',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                // showSearch(context: context, delegate: DataSearch());
+              })
+        ],
       ),
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
@@ -314,12 +321,7 @@ class _DealPageState extends State<DealPage> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: InkWell(
-                child: Icon(Icons.message),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ChatPage()));
-                }),
+            icon: InkWell(child: Icon(Icons.message), onTap: () {}),
             label: 'Message',
           ),
         ],

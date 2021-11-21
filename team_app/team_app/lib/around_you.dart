@@ -11,7 +11,6 @@ import 'package:team_app/profile.dart';
 import 'package:team_app/services/deal_services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'chatpage.dart';
 import 'controllers/deal_controller.dart';
 
 class LocationPage extends StatefulWidget {
@@ -169,12 +168,7 @@ class _LocationPageState extends State<LocationPage> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: InkWell(
-                child: Icon(Icons.message),
-                onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ChatPage()));
-                }),
+            icon: InkWell(child: Icon(Icons.message), onTap: () {}),
             label: 'Message',
           ),
         ],
