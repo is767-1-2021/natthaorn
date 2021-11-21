@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:team_app/screens/auth_screen.dart';
 import 'package:team_app/screens/chat_screen.dart';
 import 'package:team_app/screens/login_screen.dart';
+import 'package:team_app/screens/signup_screen.dart';
 import 'package:team_app/services/deal_services.dart';
 import 'controllers/deal_controller.dart';
 import 'deal_page.dart';
@@ -40,29 +41,15 @@ class DealApp extends StatelessWidget {
           primaryColor: Colors.deepPurple[900],
           fontFamily: 'IBM Plex Sans Thai'),
       debugShowCheckedModeBanner: false,
-      // initialRoute: '/AuthScreen',
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapShot) {
             if (snapShot.hasData) {
-              return LoginScreen(); /*ต้องแก้เป็น DealPage*/
+              return DealPage(); /*ต้องแก้เป็น DealPage*/
             }
             // return AuthScreen();
             return HomePage();
           }),
-      // routes: <String, WidgetBuilder>{
-      //   '/login': (context) => LoginPage(),
-      //   '/home': (context) => HomePage(),
-      //   '/Nav': (context) => Nav(
-      //         controller: controller,
-      //       ),
-      //   // '/editProfile': (context) => EditProfilePage(),
-      //   '/profile': (context) => ProfilePage(),
-      //   '/historydeal': (context) => HistoryDealPage(),
-      //   // '/joindeal': (context) => JoinDeal(ds: ds),
-      //   '/DealPage': (context) => DealPage(),
-      //   '/AuthScreen': (context) => AuthScreen(),
-      // },
     );
   }
 }

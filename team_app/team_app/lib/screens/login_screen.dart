@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:team_app/deal_page.dart';
+import 'package:team_app/screens/chat_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   /*สร้าง form ให้เก็บค่าที่สมัคร*/
   final _formKey = GlobalKey<FormState>();
 
-  /*signUp to Firebase*/
+  /*Login to Firebase*/
   void _submit() async {
     /*เซตตัวแปร _isValid แล้วก็เขียน condition ว่าอะไรคือ _isValid*/
     final _isValid = _formKey.currentState!.validate();
@@ -33,6 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     _formKey.currentState!.save();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DealPage()));
 
     /*set เวลากดปุ่ม signUp จะให้ขึ้นเป็น CircularProgressIndicator*/
     setState(() {

@@ -6,6 +6,7 @@ import 'package:team_app/model/deal_model.dart';
 import 'package:flutter/material.dart';
 import 'package:team_app/nav.dart';
 import 'package:team_app/profile.dart';
+import 'package:team_app/screens/chat_screen.dart';
 import 'package:team_app/services/deal_services.dart';
 import 'around_you.dart';
 import 'create_deal.dart';
@@ -51,61 +52,11 @@ class _DealPageState extends State<DealPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: Drawer(
-      //       child: ListView(
-      //     padding: EdgeInsets.all(0.5),
-      //     children: [
-      //       DrawerHeader(
-      //           decoration: BoxDecoration(color: Colors.deepPurple),
-      //           child: Text('WeDeal Menu',
-      //               style: TextStyle(
-      //                   color: Colors.white,
-      //                   fontSize: 20,
-      //                   fontWeight: FontWeight.bold))),
-      //       ListTile(
-      //         title: Text('Around You',
-      //             style:
-      //                 TextStyle(color: Colors.deepPurple[900], fontSize: 15)),
-      //         onTap: () {
-      //           Navigator.push(context,
-      //               MaterialPageRoute(builder: (context) => LocationPage()));
-      //         },
-      //         trailing: Icon(Icons.location_on),
-      //       ),
-      //       ListTile(
-      //         title: Text('Profile',
-      //             style:
-      //                 TextStyle(color: Colors.deepPurple[900], fontSize: 15)),
-      //         onTap: () {
-      //           Navigator.push(context,
-      //               MaterialPageRoute(builder: (context) => ProfilePage()));
-      //         },
-      //         trailing: Icon(Icons.person_pin_rounded),
-      //       ),
-      //       ListTile(
-      //         title: Text('Chats',
-      //             style:
-      //                 TextStyle(color: Colors.deepPurple[900], fontSize: 15)),
-      //         onTap: () {
-      //           Navigator.push(context,
-      //               MaterialPageRoute(builder: (context) => ChatPage()));
-      //         },
-      //         trailing: Icon(Icons.chat_outlined),
-      //       ),
-      //     ],
-      //   )),
       backgroundColor: Colors.deepPurple[900],
       appBar: AppBar(
         centerTitle: true,
         title: Text('Enjoy with the best Deal!',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                // showSearch(context: context, delegate: DataSearch());
-              })
-        ],
       ),
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
@@ -283,45 +234,45 @@ class _DealPageState extends State<DealPage> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
+        showSelectedLabels: true,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
         iconSize: 30.0,
         selectedFontSize: 14.0,
         items: [
           BottomNavigationBarItem(
+            backgroundColor: Colors.deepPurple[900],
             icon: InkWell(
-              child: Icon(Icons.home, color: Colors.deepPurple),
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => DealPage()));
-              },
+              child: Icon(Icons.home, color: Colors.white),
+              onTap: () {},
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: InkWell(
-                child: Icon(
-                  Icons.near_me,
-                ),
+                child: Icon(Icons.near_me, color: Colors.white),
                 onTap: () {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => LocationPage()));
                 }),
             label: 'Around You',
           ),
           BottomNavigationBarItem(
             icon: InkWell(
-                child: Icon(Icons.person),
+                child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => ProfilePage()));
                 }),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: InkWell(child: Icon(Icons.message), onTap: () {}),
+            icon: InkWell(
+                child: Icon(Icons.message, color: Colors.white),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()));
+                }),
             label: 'Message',
           ),
         ],

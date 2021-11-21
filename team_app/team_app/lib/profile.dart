@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:team_app/favorite_page.dart';
+import 'package:team_app/firstpage.dart';
+import 'package:team_app/screens/chat_screen.dart';
 import 'around_you.dart';
 import 'controllers/deal_controller.dart';
 import 'deal_page.dart';
@@ -59,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              backgroundColor: Colors.deepPurple[600],
+              backgroundColor: Colors.deepPurple[900],
               title: Text(
                 'Profile',
                 style: TextStyle(color: Colors.white),
@@ -279,7 +282,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: EdgeInsets.all(5),
                             child: Card(
                               child: ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              FavoritePage()));
+                                },
                                 title: Text(
                                   'Favorite Deal',
                                   style: TextStyle(
@@ -327,9 +336,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: EdgeInsets.all(10),
                             child: ElevatedButton(
                               child: Text('Log Out'),
-                              onPressed: () {
-                                Navigator.popUntil(
-                                    context, ModalRoute.withName('/home'));
+                              onPressed: () async {
+                                await FirebaseAuth.instance.signOut();
                               },
                               style: ElevatedButton.styleFrom(
                                   primary: Colors.deepPurple.shade600,
@@ -342,16 +350,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   ]),
             ),
             bottomNavigationBar: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              showSelectedLabels: false,
+              showSelectedLabels: true,
               showUnselectedLabels: false,
               currentIndex: _selectedIndex,
               iconSize: 30.0,
               selectedFontSize: 14.0,
               items: [
                 BottomNavigationBarItem(
+                  backgroundColor: Colors.deepPurple[900],
                   icon: InkWell(
-                    child: Icon(Icons.home),
+                    child: Icon(Icons.home, color: Colors.white),
                     onTap: () {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => DealPage()));
@@ -361,7 +369,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: InkWell(
-                      child: Icon(Icons.near_me),
+                      child: Icon(Icons.near_me, color: Colors.white),
                       onTap: () {
                         Navigator.pushReplacement(
                             context,
@@ -372,21 +380,23 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: InkWell(
-                      child: Icon(Icons.person),
+                      child: Icon(Icons.person, color: Colors.white),
+                      onTap: () {}),
+                  label: 'Profile',
+                ),
+                BottomNavigationBarItem(
+                  icon: InkWell(
+                      child: Icon(Icons.message, color: Colors.white),
                       onTap: () {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfilePage()));
+                                builder: (context) => ChatScreen()));
                       }),
-                  label: 'Profile',
-                ),
-                BottomNavigationBarItem(
-                  icon: InkWell(child: Icon(Icons.message), onTap: () {}),
                   label: 'Message',
                 ),
               ],
-              onTap: (index) {
+              onTap: (int index) {
                 setState(() {
                   _selectedIndex = index;
                 });
