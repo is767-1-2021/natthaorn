@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:team_app/deal_page.dart';
 import 'package:team_app/login.dart';
 import 'package:team_app/nav.dart';
+import 'package:team_app/services/deal_services.dart';
+
+import 'controllers/deal_controller.dart';
 
 class SignUpPage extends StatelessWidget {
   @override
@@ -21,11 +27,35 @@ class MyCustomForm extends StatefulWidget {
 
 class _MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
-  String? _name;
-  String? _phone;
-  String? _email;
+  String? _fullname;
+  String? _gender;
+  DateTime? _birthday;
+  String? _phoneNo;
   String? _password;
-  String? _confirm;
+  String? _confirmPassword;
+  String? _email;
+  String? _uid;
+  bool? _isLoggedIn;
+  String? _userNameString;
+  bool _isLoading = false;
+
+  bool _obsecureTextSignup = true;
+  bool _obsecureTextSignupConfirm = true;
+
+  bool _isPasswordSixLetters = false;
+  bool _hasPasswordOneNumber = false;
+
+  onPasswordChange(String value) {
+    final numericRegex = RegExp(r'[0-9]');
+
+    setState(() {
+      _isPasswordSixLetters = false;
+      if (value.length >= 6) _isPasswordSixLetters = true;
+
+      _hasPasswordOneNumber = false;
+      if (numericRegex.hasMatch(value)) _hasPasswordOneNumber = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +79,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
                   SizedBox(
                     height: 20,
                   ),
-
-                  //Text("Name", style: TextStyle(fontSize: 14)),
                   TextFormField(
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person_add_outlined),
                           labelText: 'Name',
-                          hintText: 'Please input your Name',
+                          hintText: 'Please input your username',
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                           enabledBorder: OutlineInputBorder(
@@ -72,7 +100,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                         return null;
                       },
                       onSaved: (value) {
-                        _name = value;
+                        _userNameString = value;
                       }),
 
                   SizedBox(
@@ -100,13 +128,12 @@ class _MyCustomFormState extends State<MyCustomForm> {
                         return null;
                       },
                       onSaved: (value) {
-                        _phone = value;
+                        _phoneNo = value;
                       }),
 
                   SizedBox(
                     height: 7,
                   ),
-                  //Text("Email", style: TextStyle(fontSize: 14)),
                   TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
@@ -135,7 +162,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
                   SizedBox(
                     height: 7,
                   ),
-                  //Text("Password", style: TextStyle(fontSize: 14)),
                   TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
@@ -165,7 +191,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
                   SizedBox(
                     height: 7,
                   ),
-                  //Text("Confirm Password", style: TextStyle(fontSize: 14)),
                   TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
@@ -189,28 +214,49 @@ class _MyCustomFormState extends State<MyCustomForm> {
                         return null;
                       },
                       onSaved: (value) {
-                        _password = value;
+                        _confirmPassword = value;
                       }),
+                  /*ปุ่ม SignUp*/
+                  _isLoading
+                      ? CircularProgressIndicator()
+                      : Container(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            child: Text('Signup'),
+                            onPressed: () async {
+                              var services = FirebaseServices();
+                              var controller = DealController(services);
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
 
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.deepPurple[700]),
-                        child: Text("Sign Up", style: TextStyle(fontSize: 18)),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
-                          }
-                          var controller;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Nav(
-                                        controller: controller,
-                                      )));
-                        }),
-                  ),
+                                UserCredential userCredential;
+                                userCredential = await FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
+                                        email: _email!, password: _password!);
+
+                                await FirebaseFirestore.instance
+                                    .collection('group_users')
+                                    .doc(userCredential.user!.uid)
+                                    .set({
+                                  /*mapping*/
+                                  'userId': userCredential.user!.uid,
+                                  'userName': _userNameString,
+                                  'email': _email,
+                                  'password': _password,
+                                  'phoneNo': _phoneNo,
+                                  'isLoggedIn': false,
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        'Signup Successful! Lets Join WeDeal')));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DealPage()));
+                              }
+                            },
+                          ),
+                        ),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +271,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
                             textStyle: const TextStyle(
                                 fontSize: 16, color: Colors.deepPurple)),
                         onPressed: () {
-                          /*เขียนคล้ายๆ addDeal เป็น collection group_user*/
                           Navigator.push(
                               context,
                               MaterialPageRoute(

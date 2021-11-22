@@ -350,7 +350,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ]),
             ),
             bottomNavigationBar: BottomNavigationBar(
-              showSelectedLabels: true,
+              showSelectedLabels: false,
               showUnselectedLabels: false,
               currentIndex: _selectedIndex,
               iconSize: 30.0,
@@ -381,7 +381,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 BottomNavigationBarItem(
                   icon: InkWell(
                       child: Icon(Icons.person, color: Colors.white),
-                      onTap: () {}),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()));
+                      }),
                   label: 'Profile',
                 ),
                 BottomNavigationBarItem(

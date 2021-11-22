@@ -25,15 +25,15 @@ class Messages extends StatelessWidget {
         return ListView.builder(
           reverse: true,
           itemCount: chatDocs.length,
-          itemBuilder: (ctx, i) {
+          itemBuilder: (ctx, int) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: MsgBubble(
-                chatDocs[i]['text'],
-                chatDocs[i]['userId'] == _auth.currentUser!.uid,
-                chatDocs[i]['username'],
-                chatDocs[i]['userImage'],
-                key: ValueKey(chatDocs[i].id),
+                chatDocs[int]['text'],
+                chatDocs[int]['userId'] == _auth.currentUser!.uid,
+                chatDocs[int]['username'],
+                chatDocs[int]['userImage'],
+                key: ValueKey(chatDocs[int].id),
               ),
             );
           },

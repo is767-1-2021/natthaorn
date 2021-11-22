@@ -43,6 +43,7 @@ class _NewDealState extends State<NewDeal> {
   String? _uid;
   String? _createdUser;
   bool? isClosed;
+  bool? isFav;
 
   final items = [
     'Food & Beverage',
@@ -295,7 +296,8 @@ class _NewDealState extends State<NewDeal> {
                     'place': _place,
                     'member': _member,
                     'uid': user!.uid,
-                    'isClosed': false
+                    'isClosed': false,
+                    'isFav': false,
                   });
                   /*ใส่ function addDeal*/
                   /*ใส่ snackbar โชว์ว่าอัพเดทไปแล้ว*/

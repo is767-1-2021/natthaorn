@@ -7,10 +7,7 @@ import 'package:team_app/join_deal.dart';
 import 'package:team_app/login.dart';
 import 'package:team_app/nav.dart';
 import 'package:provider/provider.dart';
-import 'package:team_app/screens/auth_screen.dart';
 import 'package:team_app/screens/chat_screen.dart';
-import 'package:team_app/screens/login_screen.dart';
-import 'package:team_app/screens/signup_screen.dart';
 import 'package:team_app/services/deal_services.dart';
 import 'controllers/deal_controller.dart';
 import 'deal_page.dart';
@@ -44,10 +41,6 @@ class DealApp extends StatelessWidget {
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapShot) {
-            if (snapShot.hasData) {
-              return DealPage(); /*ต้องแก้เป็น DealPage*/
-            }
-            // return AuthScreen();
             return HomePage();
           }),
     );

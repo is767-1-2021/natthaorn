@@ -48,7 +48,7 @@ class _NewMessageState extends State<NewMessage> {
                         .collection('group_users')
                         .doc(_auth.currentUser!.uid)
                         .get();
-                    FirebaseFirestore.instance
+                    await FirebaseFirestore.instance
                         .collection('group_chats')
                         .doc()
                         .set({

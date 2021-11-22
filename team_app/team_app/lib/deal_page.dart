@@ -234,7 +234,7 @@ class _DealPageState extends State<DealPage> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: true,
+        showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
         iconSize: 30.0,
