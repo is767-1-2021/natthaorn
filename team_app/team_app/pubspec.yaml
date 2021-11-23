@@ -70,12 +70,8 @@ flutter:
      - image/profile.png
      - image/map1.jpeg
      - image/APPLEBACKTOSCHOOL.jpg
-     - image/hotsale.png
-     - image/wedeal.png
      - image/WeDeal_logo.png
      - image/potatocorner.jpg
-     - image/profile2.jpg
-     - image/starbucks.jpg
      - image/swensens.jpg
      - image/shabu.jpg
      - image/levis.jpg
@@ -90,7 +86,9 @@ flutter:
      - image/proUniqlo.jpg
      - image/proKoi.jpg
      - image/HOTPOT4BUY3.jpg
-     - image/captain_america.jpg
+     - image/logo4.jpg
+     - image/bg2.png
+
 
 
 

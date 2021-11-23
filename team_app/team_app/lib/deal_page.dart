@@ -48,6 +48,10 @@ class _DealPageState extends State<DealPage> {
     });
   }
 
+  void _updateFavDeal(String uid, bool isFav) async {
+    await FirebaseServices().updateFavDeal(uid, isFav);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,9 +209,16 @@ class _DealPageState extends State<DealPage> {
                                           width: 35.0,
                                           height: 35.0,
                                           child: IconButton(
-                                            icon: Icon(Icons.favorite_outline),
-                                            onPressed: () {},
-                                          )),
+                                              icon: Icon(Icons.favorite,
+                                                  color:
+                                                      deals[index].isFav == true
+                                                          ? Colors.red
+                                                          : null),
+                                              onPressed: () {
+                                                _updateFavDeal(
+                                                    deals[index].uid, true);
+                                                _getDeals();
+                                              })),
                                     ),
                                   ],
                                 ),

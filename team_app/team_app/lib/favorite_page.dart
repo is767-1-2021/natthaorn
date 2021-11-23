@@ -194,7 +194,10 @@ class _FavoritePageState extends State<FavoritePage> {
                                           width: 35.0,
                                           height: 35.0,
                                           child: IconButton(
-                                            icon: Icon(Icons.favorite_outline),
+                                            icon: Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                            ),
                                             onPressed: () {},
                                           )),
                                     ),
@@ -211,15 +214,6 @@ class _FavoritePageState extends State<FavoritePage> {
                   ),
                 ],
               ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.deepPurple[900],
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => CreateDeal()));
-        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
