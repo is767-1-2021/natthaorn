@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:team_app/deal_page.dart';
 import 'package:team_app/edit_profile.dart';
 import 'package:team_app/favorite_page.dart';
 import 'package:team_app/firstpage.dart';
@@ -426,7 +427,10 @@ class _Profile2PageState extends State<Profile2Page> {
             backgroundColor: Colors.deepPurple[900],
             icon: InkWell(
               child: Icon(Icons.home, color: Colors.white),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => DealPage()));
+              },
             ),
             label: 'Home',
           ),

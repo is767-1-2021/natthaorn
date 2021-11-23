@@ -26,9 +26,7 @@ class DealController {
     return favdeals;
   }
 
-  // Future<void> updateFavDeal(String uid, bool isFav) async {
-  //   onSyncController.add(true);
-  //   await services.updateFavDeal(uid, isFav);
-  //   onSyncController.add(false);
-  // }
+  Future<void> updateFavDeal(String uid, bool isFav) async {
+    await services.updateFavDeal(uid, isFav);
+  }
 }

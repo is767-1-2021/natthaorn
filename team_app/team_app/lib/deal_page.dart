@@ -26,6 +26,7 @@ class DealPage extends StatefulWidget {
 class _DealPageState extends State<DealPage> {
   List<Deal> deals = List.empty();
   bool isLoading = false;
+  bool _isFavorited = false;
   int _selectedIndex = 0;
   var controller;
 
@@ -48,8 +49,18 @@ class _DealPageState extends State<DealPage> {
     });
   }
 
-  void _updateFavDeal(int index, bool isFav) async {
-    await FirebaseServices().updateFavDeal(index, isFav);
+  void _toggleFavorite() {
+    setState(() {
+      if (_isFavorited) {
+        _isFavorited = false;
+      } else {
+        _isFavorited = true;
+      }
+    });
+  }
+
+  void _updateFavDeal(String uid, bool isFav) async {
+    await widget.controller.updateFavDeal(uid, isFav);
   }
 
   @override
@@ -206,24 +217,26 @@ class _DealPageState extends State<DealPage> {
                                     Expanded(
                                       flex: 1,
                                       child: SizedBox(
-                                          width: 35.0,
-                                          height: 35.0,
-                                          child: IconButton(
-                                              icon: Icon(Icons.favorite,
-                                                  color:
-                                                      deals[index].isFav == true
-                                                          ? Colors.red
-                                                          : null),
-                                              onPressed: () {
-                                                void _updateFavDeal(
-                                                    int i, bool isFav) async {
-                                                  await FirebaseServices()
-                                                      .updateFavDeal(index,
-                                                          !deals[index].isFav);
+                                        width: 35.0,
+                                        height: 35.0,
+                                        child: IconButton(
+                                            icon: deals[index].isFav
+                                                ? Icon(Icons.favorite)
+                                                : Icon(Icons.favorite_outline),
+                                            color: Colors.red,
+                                            iconSize: 18,
+                                            onPressed: () {
+                                              setState(() {
+                                                if (deals[index].isFav) {
+                                                  deals[index].isFav = false;
+                                                } else {
+                                                  deals[index].isFav = true;
                                                 }
-
-                                                _getDeals();
-                                              })),
+                                                _updateFavDeal(deals[index].uid,
+                                                    deals[index].isFav);
+                                              });
+                                            }),
+                                      ),
                                     ),
                                   ],
                                 ),
