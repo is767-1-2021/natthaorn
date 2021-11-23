@@ -48,8 +48,8 @@ class _DealPageState extends State<DealPage> {
     });
   }
 
-  void _updateFavDeal(String uid, bool isFav) async {
-    await FirebaseServices().updateFavDeal(uid, isFav);
+  void _updateFavDeal(int index, bool isFav) async {
+    await FirebaseServices().updateFavDeal(index, isFav);
   }
 
   @override
@@ -215,8 +215,13 @@ class _DealPageState extends State<DealPage> {
                                                           ? Colors.red
                                                           : null),
                                               onPressed: () {
-                                                _updateFavDeal(
-                                                    deals[index].uid, true);
+                                                void _updateFavDeal(
+                                                    int i, bool isFav) async {
+                                                  await FirebaseServices()
+                                                      .updateFavDeal(index,
+                                                          !deals[index].isFav);
+                                                }
+
                                                 _getDeals();
                                               })),
                                     ),
