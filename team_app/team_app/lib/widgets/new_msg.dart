@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
 
 class NewMessage extends StatefulWidget {
   @override
@@ -8,7 +9,6 @@ class NewMessage extends StatefulWidget {
 }
 
 class _NewMessageState extends State<NewMessage> {
-  /*ตัวแปรและ controller ที่ต้องใช้*/
   var _enteredMsg = '';
   var msgCon = TextEditingController();
 
@@ -21,7 +21,6 @@ class _NewMessageState extends State<NewMessage> {
         children: [
           Expanded(
             child: TextFormField(
-              /*เซต controller เพื่อให้กดส่งแล้ว ข้อความใน field เป็น empty*/
               controller: msgCon,
               onChanged: (val) {
                 setState(() {
@@ -43,7 +42,6 @@ class _NewMessageState extends State<NewMessage> {
                 : () async {
                     FocusScope.of(context).unfocus();
                     FirebaseAuth _auth = FirebaseAuth.instance;
-                    /*ใครที่ Login เข้ามาดู auth.currentUser*/
                     var userdata = await FirebaseFirestore.instance
                         .collection('group_users')
                         .doc(_auth.currentUser!.uid)
@@ -55,8 +53,8 @@ class _NewMessageState extends State<NewMessage> {
                       'text': _enteredMsg,
                       'createdAt': Timestamp.now(),
                       'userId': _auth.currentUser!.uid,
-                      'username': userdata['username'],
-                      'userImage': userdata['userImage'],
+                      'username': userdata['userName'],
+                      'userImage': userdata['image'],
                     });
                     msgCon.clear();
                     setState(() {

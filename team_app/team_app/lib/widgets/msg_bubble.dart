@@ -23,10 +23,12 @@ class _MsgBubbleState extends State<MsgBubble> {
               widget.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
           children: [
             Container(
-              width: 140,
+              width: 200,
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
               decoration: BoxDecoration(
-                color: widget.isMe ? Colors.pink[100] : Colors.deepPurple[300],
+                color: widget.isMe
+                    ? Colors.grey[300]
+                    : Theme.of(context).accentColor,
                 borderRadius: widget.isMe
                     ? BorderRadius.only(
                         topRight: Radius.circular(12),
@@ -47,6 +49,7 @@ class _MsgBubbleState extends State<MsgBubble> {
                   Text(
                     widget.username,
                     style: TextStyle(
+                      fontWeight: FontWeight.bold,
                       color: widget.isMe ? Colors.black : Colors.white,
                     ),
                   ),
@@ -63,9 +66,9 @@ class _MsgBubbleState extends State<MsgBubble> {
           ],
         ),
         Positioned(
-          right: widget.isMe ? 110 : null,
+          right: widget.isMe ? 180 : null,
           top: -10,
-          left: widget.isMe ? null : 110,
+          left: widget.isMe ? null : 180,
           child: CircleAvatar(
             backgroundImage: NetworkImage(
               widget.imageUrl,

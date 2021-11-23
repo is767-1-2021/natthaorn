@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:team_app/widgets/messages.dart';
 import 'package:team_app/widgets/new_msg.dart';
 
@@ -10,7 +9,10 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text('Chats'),
+        title: Text(
+          'Chats',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
             onPressed: () async {

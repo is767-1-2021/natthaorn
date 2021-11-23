@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:team_app/widgets/msg_bubble.dart';
+
+import 'msg_bubble.dart';
 
 class Messages extends StatelessWidget {
   @override
@@ -25,15 +26,15 @@ class Messages extends StatelessWidget {
         return ListView.builder(
           reverse: true,
           itemCount: chatDocs.length,
-          itemBuilder: (ctx, int) {
+          itemBuilder: (ctx, i) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: MsgBubble(
-                chatDocs[int]['text'],
-                chatDocs[int]['userId'] == _auth.currentUser!.uid,
-                chatDocs[int]['username'],
-                chatDocs[int]['userImage'],
-                key: ValueKey(chatDocs[int].id),
+                chatDocs[i]['text'],
+                chatDocs[i]['userId'] == _auth.currentUser!.uid,
+                chatDocs[i]['username'],
+                chatDocs[i]['userImage'],
+                key: ValueKey(chatDocs[i].id),
               ),
             );
           },
