@@ -26,7 +26,7 @@ class DealController {
     return favdeals;
   }
 
-  Future<void> updateFavDeal(String uid, bool isFav) async {
-    await services.updateFavDeal(uid, isFav);
+  Future<void> updateFavDeal(int i, bool isFav) async {
+    await services.updateFavDeal(i, isFav);
   }
 }

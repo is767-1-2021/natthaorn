@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.deepPurple[700],
+          backgroundColor: Colors.deepPurple.shade500,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -48,9 +48,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 Text(
                   "WeDeal",
                   style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 30,
-                      color: Colors.black54),
+                      fontFamily: 'IBMPlexSansThai',
+                      fontWeight: FontWeight.w300,
+                      fontSize: 40,
+                      color: Colors.deepPurple.shade900),
                 ),
                 SizedBox(
                   height: 20,
@@ -62,22 +63,26 @@ class _MyCustomFormState extends State<MyCustomForm> {
                       fontSize: 20,
                       color: Colors.black87),
                 ),
-                SizedBox(height: 20),
 
                 //Text("Email", style: TextStyle(fontSize: 16)),
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
+                  autocorrect: false,
                   decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email_outlined),
+                      fillColor: Colors.white10,
+                      filled: true,
+                      prefixIcon:
+                          Icon(Icons.email_outlined, color: Colors.black87),
                       labelText: 'Email',
                       hintText: 'Please input your Email',
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.grey.shade500),
                       ),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey.shade400))),
+                          borderSide: BorderSide(color: Colors.grey.shade500))),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Email';
@@ -96,17 +101,20 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock_clock_outlined),
-                      suffixIcon: Icon(Icons.visibility_off_outlined),
+                      prefixIcon: Icon(Icons.lock_clock_outlined,
+                          color: Colors.black87),
+                      suffixIcon: Icon(Icons.visibility_off_outlined,
+                          color: Colors.black87),
                       labelText: 'Password',
                       hintText: 'Please input your Password',
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.grey.shade500),
                       ),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey.shade400))),
+                          borderSide: BorderSide(color: Colors.grey.shade500))),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Password';
@@ -128,7 +136,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                       style: TextButton.styleFrom(
                           primary: Colors.black45,
                           textStyle: const TextStyle(
-                              fontSize: 14, color: Colors.black54)),
+                              fontSize: 14, color: Colors.black87)),
                       onPressed: () {},
                       child: const Text("Forgot Password?"),
                     ),
@@ -171,7 +179,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DealPage()));
+                                        builder: (context) => DealPage(
+                                              controller: controller,
+                                            )));
                               });
                               /*e = error try on catch เป็นการแจ้งว่ามี exit route เดิมไปแล้ว*/
                               /*เป็น default code*/
@@ -196,7 +206,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                     children: <Widget>[
                       Text(
                         "Don't have an account?",
-                        style: TextStyle(fontSize: 16, color: Colors.black54),
+                        style: TextStyle(fontSize: 16, color: Colors.black87),
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
@@ -219,12 +229,12 @@ class _MyCustomFormState extends State<MyCustomForm> {
                     children: <Widget>[
                       Text(
                         "- Or -",
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                        style: TextStyle(fontSize: 14, color: Colors.black87),
                       ),
                       SizedBox(height: 10),
                       Text(
                         "Sign In with",
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                        style: TextStyle(fontSize: 14, color: Colors.black87),
                       ),
                       SizedBox(
                         height: 30,
@@ -234,32 +244,32 @@ class _MyCustomFormState extends State<MyCustomForm> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Container(
-                            height: 55.0,
-                            width: 55.0,
+                            height: 60.0,
+                            width: 60.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                               image: AssetImage("image/facebook.png"),
                             )),
                           ),
                           Container(
-                            height: 55.0,
-                            width: 55.0,
+                            height: 60.0,
+                            width: 60.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                               image: AssetImage("image/google.png"),
                             )),
                           ),
                           Container(
-                            height: 55.0,
-                            width: 55.0,
+                            height: 60.0,
+                            width: 60.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                               image: AssetImage("image/line.png"),
                             )),
                           ),
                           Container(
-                            height: 55.0,
-                            width: 55.0,
+                            height: 60.0,
+                            width: 60.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                               image: AssetImage("image/twitter.png"),

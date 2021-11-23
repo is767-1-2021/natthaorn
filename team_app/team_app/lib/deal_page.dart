@@ -12,12 +12,9 @@ import 'create_deal.dart';
 import 'join_deal.dart';
 
 class DealPage extends StatefulWidget {
-  var controller;
-  var service = FirebaseServices();
+  final DealController controller;
 
-  DealPage() {
-    controller = DealController(service);
-  }
+  const DealPage({Key? key, required this.controller}) : super(key: key);
 
   @override
   _DealPageState createState() => _DealPageState(this.controller);
@@ -59,8 +56,8 @@ class _DealPageState extends State<DealPage> {
     });
   }
 
-  void _updateFavDeal(String uid, bool isFav) async {
-    await widget.controller.updateFavDeal(uid, isFav);
+  void _updateFavDeal(int i, bool isFav) async {
+    await FirebaseServices().updateFavDeal(i, !deals[i].isFav);
   }
 
   @override
@@ -220,21 +217,14 @@ class _DealPageState extends State<DealPage> {
                                         width: 35.0,
                                         height: 35.0,
                                         child: IconButton(
-                                            icon: deals[index].isFav
+                                            icon: deals[index].isFav == true
                                                 ? Icon(Icons.favorite)
                                                 : Icon(Icons.favorite_outline),
                                             color: Colors.red,
                                             iconSize: 18,
-                                            onPressed: () {
-                                              setState(() {
-                                                if (deals[index].isFav) {
-                                                  deals[index].isFav = false;
-                                                } else {
-                                                  deals[index].isFav = true;
-                                                }
-                                                _updateFavDeal(deals[index].uid,
-                                                    deals[index].isFav);
-                                              });
+                                            onPressed: () async {
+                                              _updateFavDeal(
+                                                  index, !deals[index].isFav);
                                             }),
                                       ),
                                     ),
@@ -289,8 +279,12 @@ class _DealPageState extends State<DealPage> {
             icon: InkWell(
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => Profile2Page()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Profile2Page(
+                                controller: controller,
+                              )));
                 }),
             label: 'Profile',
           ),
@@ -298,8 +292,12 @@ class _DealPageState extends State<DealPage> {
             icon: InkWell(
                 child: Icon(Icons.message, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ChatScreen()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChatScreen(
+                                controller: controller,
+                              )));
                 }),
             label: 'Message',
           ),

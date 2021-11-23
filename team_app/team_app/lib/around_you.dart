@@ -165,8 +165,12 @@ class _LocationPageState extends State<LocationPage> {
             icon: InkWell(
               child: Icon(Icons.home, color: Colors.white),
               onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => DealPage()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DealPage(
+                              controller: controller,
+                            )));
               },
             ),
             label: 'Home',
@@ -180,8 +184,12 @@ class _LocationPageState extends State<LocationPage> {
             icon: InkWell(
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => Profile2Page()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Profile2Page(
+                                controller: controller,
+                              )));
                 }),
             label: 'Profile',
           ),
@@ -189,8 +197,12 @@ class _LocationPageState extends State<LocationPage> {
             icon: InkWell(
                 child: Icon(Icons.message, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ChatScreen()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChatScreen(
+                                controller: controller,
+                              )));
                 }),
             label: 'Message',
           ),

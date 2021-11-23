@@ -243,8 +243,12 @@ class _FavoritePageState extends State<FavoritePage> {
             icon: InkWell(
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => Profile2Page()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Profile2Page(
+                                controller: controller,
+                              )));
                 }),
             label: 'Profile',
           ),
@@ -252,8 +256,12 @@ class _FavoritePageState extends State<FavoritePage> {
             icon: InkWell(
                 child: Icon(Icons.message, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ChatScreen()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChatScreen(
+                                controller: controller,
+                              )));
                 }),
             label: 'Message',
           ),

@@ -274,7 +274,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DealPage()));
+                                        builder: (context) => DealPage(
+                                              controller: controller,
+                                            )));
                               }
                             },
                           ),

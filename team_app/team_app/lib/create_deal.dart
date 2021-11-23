@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:team_app/controllers/deal_controller.dart';
 import 'package:team_app/model/deal_model.dart';
+import 'package:team_app/model/user_model2.dart';
 import 'package:team_app/services/deal_services.dart';
 
 import 'deal_page.dart';
+import 'model/deal_model2.dart';
 import 'model/user_model.dart';
 
 class CreateDeal extends StatelessWidget {
@@ -63,11 +65,13 @@ class _NewDealState extends State<NewDeal> {
             height: 60,
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text('Deal Title',
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.purple[900],
-                      fontWeight: FontWeight.bold)),
+              child: Text(
+                'Deal Title',
+                style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.purple[900],
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           TextFormField(
@@ -178,49 +182,6 @@ class _NewDealState extends State<NewDeal> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'created Deal Date',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.purple[900],
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          /*ใส่วันที่สร้างดีล DateTime.now()*/
-          SizedBox(
-            height: 60,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Deal Owner',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.purple[900],
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          /*ใส่เจ้าของดีล ต้องดึงจาก account หรือว่ากรอกไปก่อน*/
-          TextFormField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Please Fill your name'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your name.';
-              }
-
-              return null;
-            },
-            onSaved: (value) {
-              _createdUser = value;
-            },
-          ),
-          SizedBox(
-            height: 60,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
                 'Category',
                 style: TextStyle(
                     fontSize: 20.0,
@@ -288,14 +249,14 @@ class _NewDealState extends State<NewDeal> {
                   await FirebaseFirestore.instance
                       .collection('group_deals')
                       .add({
-                    'createdUser': 'abc',
+                    'createdUser': user!.email,
                     'createdDateTime': _createdDateTime,
                     'title': _title,
                     'category': _category,
                     'caption': _caption,
                     'place': _place,
                     'member': _member,
-                    'uid': user!.uid,
+                    'uid': user.uid,
                     'isClosed': false,
                     'isFav': false,
                   });
@@ -304,8 +265,12 @@ class _NewDealState extends State<NewDeal> {
                   // ScaffoldMessenger.of(context).showSnackBar(context: )
                   /*pushReplacement ให้ใส่หน้าใหม่เข้ามาแทน+รีเฟรชด้วย แทนหน้าเดิม*/
                   Navigator.pop(context);
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => DealPage()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DealPage(
+                                controller: controller,
+                              )));
                 }
               },
               child: Text(
@@ -313,10 +278,10 @@ class _NewDealState extends State<NewDeal> {
                 style: TextStyle(fontSize: 20),
               ),
               style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.purple),
                   ),
                 ),
               ),

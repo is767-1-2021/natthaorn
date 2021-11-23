@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:team_app/model/deal_model.dart';
+import 'package:team_app/model/deal_model2.dart';
 
 abstract class Services {
   Future<List<Deal>> getDeals();
   Future<String> addDeal(Deal value);
   Future<List<Deal>> getFavDeals();
-  Future<void> updateFavDeal(String uid, bool isFav);
+  Future<void> updateFavDeal(int index, bool isFav);
+  Future<List<DealDB>> getFromFirebase(String? uid);
 }
 
 class FirebaseServices extends Services {
@@ -16,6 +19,30 @@ class FirebaseServices extends Services {
 
     AllDeals deals = AllDeals.fromSnapshot(snapshot);
     return deals.deals;
+  }
+
+  @override
+  Future<List<DealDB>> getFromFirebase(String? uid) async {
+    print('getFromFirebase $uid');
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('group_deals').get();
+    List<DealDB> dealList;
+    dealList = snapshot.docs.map((element) {
+      return DealDB(
+        dealID: element.id,
+        uid: element['uid'],
+        title: element['title'],
+        caption: element['caption'],
+        place: element['place'],
+        member: element['member'],
+        category: element['category'],
+        createdUser: element['createdUser'],
+        createdDateTime: element['createdDateTime'].toDate(),
+        isClosed: element['isClosed'],
+      );
+    }).toList();
+
+    return dealList;
   }
 
   @override
@@ -49,21 +76,27 @@ class FirebaseServices extends Services {
   }
 
   @override
-  Future<void> updateFavDeal(String uid, bool isFav) async {
-    CollectionReference _ref =
-        FirebaseFirestore.instance.collection('groups_deals');
-    await FirebaseFirestore.instance
-        .collection('group_deals')
-        .where('uid', isEqualTo: uid)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        _ref
-            .doc(doc.id)
-            .update({'isFav': isFav})
-            .then((value) => print("Deal Updated"))
-            .catchError((error) => print("Failed to update Deals : $error"));
-      });
-    });
+  Future<void> updateFavDeal(int index, bool isFav) async {
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('group_deals').get();
+    await snapshot.docs[index].reference.update({'isFav': isFav});
   }
+
+  // Future<void> updateFavDeal(String uid, bool isFav) async {
+  //   CollectionReference _ref =
+  //       await FirebaseFirestore.instance.collection('groups_deals');
+  //   FirebaseFirestore.instance
+  //       .collection('group_deals')
+  //       .where('uid', isEqualTo: uid)
+  //       .get()
+  //       .then((QuerySnapshot querySnapshot) {
+  //     querySnapshot.docs.forEach((doc) {
+  //       _ref
+  //           .doc(doc.id)
+  //           .update({'isFav': isFav})
+  //           .then((value) => print("Deal Updated"))
+  //           .catchError((error) => print("Failed to update Deals : $error"));
+  //     });
+  //   });
+  // }
 }

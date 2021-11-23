@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:team_app/controllers/deal_controller.dart';
 import 'package:team_app/profile.dart';
 
 class TermsOfServicePage extends StatelessWidget {
+  final DealController controller;
+  const TermsOfServicePage({Key? key, required this.controller})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,8 +20,12 @@ class TermsOfServicePage extends StatelessWidget {
         backgroundColor: Colors.deepPurple.shade600,
         leading: IconButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Profile2Page()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Profile2Page(
+                          controller: controller,
+                        )));
           },
           icon: Icon(Icons.arrow_back),
         ),
