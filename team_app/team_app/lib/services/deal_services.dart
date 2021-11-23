@@ -6,6 +6,8 @@ import 'package:team_app/model/deal_model.dart';
 abstract class Services {
   Future<List<Deal>> getDeals();
   Future<String> addDeal(Deal value);
+  Future<List<Deal>> getFavDeals();
+  // Future<void> updateFavDeal(String uid, bool isFav);
 }
 
 class FirebaseServices extends Services {
@@ -18,6 +20,7 @@ class FirebaseServices extends Services {
     return deals.deals;
   }
 
+  @override
   Future<String> addDeal(Deal value) async {
     DocumentReference ref =
         await FirebaseFirestore.instance.collection('group_deals').add({
@@ -29,9 +32,21 @@ class FirebaseServices extends Services {
       'category': value.category,
       'createdUser': value.createdUser,
       'createdDateTime': value.createdDateTime,
-      'isClosed': value.isClosed
+      'isClosed': value.isClosed,
+      'isFav': value.isFav,
     });
 
     return ref.id;
+  }
+
+  @override
+  Future<List<Deal>> getFavDeals() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('group_deals')
+        .where('isFav', isEqualTo: true)
+        .get();
+
+    AllDeals favdeals = AllDeals.fromSnapshot(snapshot);
+    return favdeals.deals;
   }
 }

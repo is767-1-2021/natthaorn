@@ -44,7 +44,7 @@ class _NewMessageState extends State<NewMessage> {
                     FocusScope.of(context).unfocus();
                     FirebaseAuth _auth = FirebaseAuth.instance;
                     /*ใครที่ Login เข้ามาดู auth.currentUser*/
-                    var userMsgdata = await FirebaseFirestore.instance
+                    var userdata = await FirebaseFirestore.instance
                         .collection('group_users')
                         .doc(_auth.currentUser!.uid)
                         .get();
@@ -55,8 +55,8 @@ class _NewMessageState extends State<NewMessage> {
                       'text': _enteredMsg,
                       'createdAt': Timestamp.now(),
                       'userId': _auth.currentUser!.uid,
-                      'username': userMsgdata['username'],
-                      'userImage': userMsgdata['userImage'],
+                      'username': userdata['username'],
+                      'userImage': userdata['userImage'],
                     });
                     msgCon.clear();
                     setState(() {

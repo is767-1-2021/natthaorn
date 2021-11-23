@@ -5,7 +5,6 @@ import 'package:team_app/firstpage.dart';
 import 'package:team_app/historyPageDeal.dart';
 import 'package:team_app/join_deal.dart';
 import 'package:team_app/login.dart';
-import 'package:team_app/nav.dart';
 import 'package:provider/provider.dart';
 import 'package:team_app/screens/chat_screen.dart';
 import 'package:team_app/services/deal_services.dart';
@@ -34,16 +33,19 @@ class DealApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-          primaryColor: Colors.deepPurple[900],
-          fontFamily: 'IBM Plex Sans Thai'),
-      debugShowCheckedModeBanner: false,
-      home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapShot) {
-            return HomePage();
-          }),
-    );
+        theme: ThemeData(
+            primaryColor: Colors.deepPurple[900],
+            fontFamily: 'IBM Plex Sans Thai'),
+        debugShowCheckedModeBanner: false,
+        home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapShot) {
+              return HomePage();
+            }),
+        routes: <String, WidgetBuilder>{
+          '/login': (context) => LoginPage(),
+          '/home': (context) => HomePage(),
+        });
   }
 }
 

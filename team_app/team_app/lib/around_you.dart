@@ -181,7 +181,7 @@ class _LocationPageState extends State<LocationPage> {
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                      MaterialPageRoute(builder: (context) => Profile2Page()));
                 }),
             label: 'Profile',
           ),

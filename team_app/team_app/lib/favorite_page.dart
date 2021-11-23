@@ -1,22 +1,22 @@
 import 'dart:ui';
 
-import 'package:team_app/controllers/favorite_controller.dart';
-import 'package:team_app/deal_page.dart';
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:team_app/controllers/deal_controller.dart';
+import 'package:team_app/model/deal_model.dart';
 import 'package:flutter/material.dart';
-import 'package:team_app/model/favorite_model.dart';
 import 'package:team_app/profile.dart';
 import 'package:team_app/screens/chat_screen.dart';
-import 'package:team_app/services/favorite_service.dart';
+import 'package:team_app/services/deal_services.dart';
 import 'around_you.dart';
 import 'create_deal.dart';
-import 'join_deal_favorite.dart';
+import 'join_deal.dart';
 
 class FavoritePage extends StatefulWidget {
   var controller;
-  var fvservice = FavoriteServices();
+  var service = FirebaseServices();
 
   FavoritePage() {
-    controller = FavoriteController(fvservice);
+    controller = DealController(service);
   }
 
   @override
@@ -24,7 +24,7 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  List<Favorite> favorites = List.empty();
+  List<Deal> favdeals = List.empty();
   bool isLoading = false;
   int _selectedIndex = 0;
   var controller;
@@ -33,18 +33,18 @@ class _FavoritePageState extends State<FavoritePage> {
 
   @override
   void initState() {
-    _getFavorites();
+    _getFavDeals();
     super.initState();
 
     widget.controller.onSync
         .listen((bool synState) => setState(() => isLoading = synState));
   }
 
-  void _getFavorites() async {
-    var newFavorites = await widget.controller.fectFavorites();
+  void _getFavDeals() async {
+    var newDeals = await widget.controller.fectFavDeals();
 
     setState(() {
-      favorites = newFavorites;
+      favdeals = newDeals;
     });
   }
 
@@ -53,14 +53,8 @@ class _FavoritePageState extends State<FavoritePage> {
     return Scaffold(
       backgroundColor: Colors.deepPurple[900],
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => ProfilePage()));
-          },
-        ),
-        title: Text('Your Favorite Deals!',
+        centerTitle: true,
+        title: Text('Enjoy with the best Deal!',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
@@ -71,21 +65,38 @@ class _FavoritePageState extends State<FavoritePage> {
                 children: <Widget>[
                   Padding(padding: EdgeInsets.all(5)),
                   SizedBox(
+                    height: 40,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Text(
+                                'Favorite Deal : ${favdeals.length.toString()} Deals Now!',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.white),
+                              )),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.all(10),
-                      itemCount: favorites.isEmpty ? 1 : favorites.length,
+                      itemCount: favdeals.isEmpty ? 1 : favdeals.length,
                       itemBuilder: (BuildContext context, int index) {
-                        Favorite fv = favorites[index];
-                        if (favorites.isNotEmpty) {
+                        Deal ds = favdeals[index];
+                        if (favdeals.isNotEmpty) {
                           return InkWell(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        JoinDealFavorite(fv: fv)),
+                                    builder: (context) => JoinDeal(ds: ds)),
                               );
                             },
                             child: Card(
@@ -108,21 +119,21 @@ class _FavoritePageState extends State<FavoritePage> {
                                         width: 70.0,
                                         height: 70.0,
                                         child: Icon(
-                                            favorites[index].category ==
+                                            favdeals[index].category ==
                                                     'Food & Beverage'
                                                 ? Icons.dinner_dining
-                                                : favorites[index].category ==
+                                                : favdeals[index].category ==
                                                         'Entertainment'
                                                     ? Icons.tv
-                                                    : favorites[index]
+                                                    : favdeals[index]
                                                                 .category ==
                                                             'Travel'
                                                         ? Icons.landscape
-                                                        : favorites[index]
+                                                        : favdeals[index]
                                                                     .category ==
                                                                 'Groceries'
                                                             ? Icons.shopping_bag
-                                                            : favorites[index]
+                                                            : favdeals[index]
                                                                         .category ==
                                                                     'Other'
                                                                 ? Icons.money
@@ -140,14 +151,14 @@ class _FavoritePageState extends State<FavoritePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(favorites[index].title,
+                                          Text(favdeals[index].title,
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
                                                   color: Colors.deepPurple[900],
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18.0)),
-                                          Text(favorites[index].brand,
+                                          Text(favdeals[index].caption,
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
@@ -158,14 +169,14 @@ class _FavoritePageState extends State<FavoritePage> {
                                                 MainAxisAlignment.spaceAround,
                                             children: [
                                               Text(
-                                                favorites[index].place,
+                                                favdeals[index].place,
                                                 style: TextStyle(
                                                     fontSize: 12.0,
                                                     color: Colors.indigo),
                                               ),
                                               Text(
-                                                  favorites[index]
-                                                      .price
+                                                  favdeals[index]
+                                                      .member
                                                       .toString(),
                                                   style: TextStyle(
                                                       color: Colors.indigo,
@@ -201,16 +212,64 @@ class _FavoritePageState extends State<FavoritePage> {
                 ],
               ),
       ),
-      // ปุ่ม สร้างข้อมูล
-      //floatingActionButton: FloatingActionButton(
-      //  foregroundColor: Colors.white,
-      //  backgroundColor: Colors.deepPurple[900],
-      //  child: Icon(Icons.add),
-      //  onPressed: () {
-      //    Navigator.pushReplacement(
-      //        context, MaterialPageRoute(builder: (context) => CreateDeal()));
-      //  },
-      //),
+      floatingActionButton: FloatingActionButton(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.deepPurple[900],
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => CreateDeal()));
+        },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: _selectedIndex,
+        iconSize: 30.0,
+        selectedFontSize: 14.0,
+        items: [
+          BottomNavigationBarItem(
+            backgroundColor: Colors.deepPurple[900],
+            icon: InkWell(
+              child: Icon(Icons.home, color: Colors.white),
+              onTap: () {},
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: InkWell(
+                child: Icon(Icons.near_me, color: Colors.white),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => LocationPage()));
+                }),
+            label: 'Around You',
+          ),
+          BottomNavigationBarItem(
+            icon: InkWell(
+                child: Icon(Icons.person, color: Colors.white),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Profile2Page()));
+                }),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: InkWell(
+                child: Icon(Icons.message, color: Colors.white),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()));
+                }),
+            label: 'Message',
+          ),
+        ],
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:team_app/deal_page.dart';
 import 'package:team_app/login.dart';
-import 'package:team_app/nav.dart';
 import 'package:team_app/services/deal_services.dart';
 
 import 'controllers/deal_controller.dart';
@@ -28,8 +28,6 @@ class MyCustomForm extends StatefulWidget {
 class _MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
   String? _fullname;
-  String? _gender;
-  DateTime? _birthday;
   String? _phoneNo;
   String? _password;
   String? _confirmPassword;
@@ -82,7 +80,30 @@ class _MyCustomFormState extends State<MyCustomForm> {
                   TextFormField(
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person_add_outlined),
-                          labelText: 'Name',
+                          labelText: 'Full Name',
+                          hintText: 'Please input your Fullname',
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400))),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter FullName';
+                        }
+
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _fullname = value;
+                      }),
+                  TextFormField(
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person_add_outlined),
+                          labelText: 'UserName',
                           hintText: 'Please input your username',
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -239,11 +260,12 @@ class _MyCustomFormState extends State<MyCustomForm> {
                                     .doc(userCredential.user!.uid)
                                     .set({
                                   /*mapping*/
-                                  'userId': userCredential.user!.uid,
-                                  'userName': _userNameString,
+                                  /*ใส่ 'image' ไม่ได้ */
                                   'email': _email,
-                                  'password': _password,
+                                  'fullname': _fullname,
+                                  'userName': _userNameString,
                                   'phoneNo': _phoneNo,
+                                  'uid': userCredential.user!.uid,
                                   'isLoggedIn': false,
                                 });
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(

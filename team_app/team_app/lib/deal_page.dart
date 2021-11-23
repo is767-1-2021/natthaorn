@@ -4,7 +4,6 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:team_app/controllers/deal_controller.dart';
 import 'package:team_app/model/deal_model.dart';
 import 'package:flutter/material.dart';
-import 'package:team_app/nav.dart';
 import 'package:team_app/profile.dart';
 import 'package:team_app/screens/chat_screen.dart';
 import 'package:team_app/services/deal_services.dart';
@@ -262,7 +261,7 @@ class _DealPageState extends State<DealPage> {
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                      MaterialPageRoute(builder: (context) => Profile2Page()));
                 }),
             label: 'Profile',
           ),

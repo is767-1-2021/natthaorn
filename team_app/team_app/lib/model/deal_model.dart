@@ -10,10 +10,11 @@ class Deal {
   final String title;
   final String uid;
   bool isClosed;
+  bool isFav;
 
   /*constructor */
   Deal(this.caption, this.category, this.createdDateTime, this.createdUser,
-      this.member, this.place, this.title, this.uid, this.isClosed);
+      this.member, this.place, this.title, this.uid, this.isClosed, this.isFav);
 
   /*โยนค่าจาก json เป็น map object*/
   factory Deal.fromJson(
@@ -29,6 +30,7 @@ class Deal {
       json['title'] as String,
       json['uid'] as String,
       json['isClosed'] as bool,
+      json['isFav'] as bool,
     );
   }
 }

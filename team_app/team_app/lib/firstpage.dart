@@ -30,7 +30,6 @@ class HomePage extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
@@ -38,11 +37,21 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 35,
-                      color: Colors.indigo.shade900,
+                      color: Colors.white,
                     ),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Better Life is high-cost,So make you deal.',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
                   Container(
-                    height: MediaQuery.of(context).size.height / 2,
+                    height: MediaQuery.of(context).size.height * 0.5,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage("image/WeDeal_logo.png"))),
