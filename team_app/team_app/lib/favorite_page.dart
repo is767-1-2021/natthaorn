@@ -20,7 +20,7 @@ class FavoritePage extends StatefulWidget {
   }
 
   @override
-  _FavoritePageState createState() => _FavoritePageState(this.controller);
+  _FavoritePageState createState() => _FavoritePageState();
 }
 
 class _FavoritePageState extends State<FavoritePage> {
@@ -28,9 +28,8 @@ class _FavoritePageState extends State<FavoritePage> {
   List<Deal> deals = List.empty();
   bool isLoading = false;
   int _selectedIndex = 0;
-  var controller;
 
-  _FavoritePageState(this.controller);
+  _FavoritePageState();
 
   @override
   void initState() {
@@ -59,7 +58,7 @@ class _FavoritePageState extends State<FavoritePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Enjoy with the best Deal!',
+        title: Text('Your favorite Deals!',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
@@ -92,9 +91,11 @@ class _FavoritePageState extends State<FavoritePage> {
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.all(10),
-                      itemCount: favdeals.isEmpty ? 1 : favdeals.length,
+                      itemCount: favdeals.length,
                       itemBuilder: (BuildContext context, int index) {
                         Deal ds = favdeals[index];
+                        var services = FirebaseServices();
+                        var controller = DealController(services);
                         if (favdeals.isNotEmpty) {
                           return InkWell(
                             onTap: () {
@@ -102,9 +103,7 @@ class _FavoritePageState extends State<FavoritePage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DealDetail2(
-                                          ds: ds,
-                                          controller: controller,
-                                        )),
+                                        ds: ds, controller: controller)),
                               );
                             },
                             child: Card(

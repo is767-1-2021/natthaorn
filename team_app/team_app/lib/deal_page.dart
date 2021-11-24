@@ -121,14 +121,15 @@ class _DealPageState extends State<DealPage> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    height: MediaQuery.of(context).size.height * 1.5,
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.all(10),
                       itemCount: deals.isEmpty ? 1 : deals.length,
                       itemBuilder: (BuildContext context, int index) {
-                        Deal ds = deals[index];
-                        if (deals.isNotEmpty) {
+                        var ds;
+                        if (deals.length != 0) {
+                          ds = deals[index];
                           return InkWell(
                             onTap: () {
                               Navigator.push(

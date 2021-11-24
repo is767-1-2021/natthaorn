@@ -38,24 +38,10 @@ class _LocationPageState extends State<LocationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Location', style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.deepPurple,
-          actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LocationPage(),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.map)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.account_circle)),
-          ]
-          //automaticallyImplyLeading: false,
-          ),
+        title: const Text('Location', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.deepPurple,
+        automaticallyImplyLeading: false,
+      ),
       body: GoogleMap(
         markers: {
           Marker(
@@ -140,18 +126,6 @@ class _LocationPageState extends State<LocationPage> {
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          _openOnGoogleMapApp(13.74719, 100.53892);
-        },
-        label: const Text(
-          'Change Location',
-          style:
-              TextStyle(fontFamily: 'BaiJamjuree', fontWeight: FontWeight.bold),
-        ),
-        icon: const Icon(Icons.pin_drop_outlined),
-        //backgroundColor: Colors.teal.withOpacity(0.95),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: true,

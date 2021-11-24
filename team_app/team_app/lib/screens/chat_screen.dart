@@ -17,11 +17,18 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_sharp),
-            onPressed: () async {
-              FirebaseAuth _auth = FirebaseAuth.instance;
-              await _auth.signOut();
+            onPressed: () {
+              Navigator.pop(context);
             }),
         title: Text('Chats'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+            },
+          )
+        ],
       ),
       body: Column(
         children: [

@@ -631,7 +631,9 @@ class _DealDetail2State extends State<DealDetail2> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      backgroundColor: Colors.deepPurple,
       floatingActionButton: FloatingActionButton(
+        foregroundColor: Colors.white,
         onPressed: () async {
           _incrementCounter();
 
