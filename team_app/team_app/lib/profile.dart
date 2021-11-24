@@ -403,9 +403,10 @@ class _Profile2PageState extends State<Profile2Page> {
                                       padding: EdgeInsets.all(10),
                                       child: ElevatedButton(
                                         child: Text('Log Out'),
-                                        onPressed: () {
-                                          Navigator.popUntil(context,
-                                              ModalRoute.withName('/home'));
+                                        onPressed: () async {
+                                          FirebaseAuth _auth =
+                                              FirebaseAuth.instance;
+                                          await _auth.signOut();
                                         },
                                         style: ElevatedButton.styleFrom(
                                             primary: Colors.deepPurple.shade600,

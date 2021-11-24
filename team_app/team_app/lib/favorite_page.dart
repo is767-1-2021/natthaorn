@@ -49,8 +49,8 @@ class _FavoritePageState extends State<FavoritePage> {
     });
   }
 
-  void _updateFavDeal(int i, bool isFav) async {
-    await FirebaseServices().updateFavDeal(i, !deals[i].isFav);
+  void _updateFavDeal(int index, bool isFav) async {
+    await FirebaseServices().updateFavDeal(index, !deals[index].isFav);
   }
 
   @override
@@ -203,10 +203,11 @@ class _FavoritePageState extends State<FavoritePage> {
                                           width: 35.0,
                                           height: 35.0,
                                           child: IconButton(
-                                              icon: Icon(
-                                                Icons.favorite,
-                                                color: Colors.red,
-                                              ),
+                                              icon: deals[index].isFav
+                                                  ? Icon(Icons.favorite_outline)
+                                                  : Icon(Icons.favorite),
+                                              color: Colors.red,
+                                              iconSize: 18,
                                               onPressed: () async {
                                                 setState(() {
                                                   if (deals[index].isFav) {

@@ -233,7 +233,7 @@ class _DealPageState extends State<DealPage> {
                                         width: 35.0,
                                         height: 35.0,
                                         child: IconButton(
-                                            icon: deals[index].isFav == true
+                                            icon: deals[index].isFav
                                                 ? Icon(Icons.favorite_outline)
                                                 : Icon(Icons.favorite),
                                             color: Colors.red,
