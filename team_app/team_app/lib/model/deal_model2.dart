@@ -124,6 +124,7 @@ class DealModel extends ChangeNotifier {
     data['createdDateTime'] = createdDateTime;
     data['isClosed'] = isClosed;
     data['joint_members'] = joint;
+
     Map<String, dynamic> toJson() {
       final Map<String, dynamic> joint = <String, dynamic>{};
       joint['jointID'] = dealID;

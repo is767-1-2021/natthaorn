@@ -1,15 +1,15 @@
 import 'dart:ui';
 
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:team_app/controllers/deal_controller.dart';
-import 'package:team_app/model/deal_model.dart';
+import 'package:team_app/deal_page.dart';
 import 'package:flutter/material.dart';
+import 'package:team_app/join_deal.dart';
+import 'package:team_app/model/deal_model.dart';
 import 'package:team_app/profile.dart';
 import 'package:team_app/screens/chat_screen.dart';
 import 'package:team_app/services/deal_services.dart';
 import 'around_you.dart';
+import 'controllers/deal_controller.dart';
 import 'create_deal.dart';
-import 'join_deal.dart';
 
 class FavoritePage extends StatefulWidget {
   var controller;
@@ -20,7 +20,7 @@ class FavoritePage extends StatefulWidget {
   }
 
   @override
-  _FavoritePageState createState() => _FavoritePageState();
+  _FavoritePageState createState() => _FavoritePageState(this.controller);
 }
 
 class _FavoritePageState extends State<FavoritePage> {
@@ -28,6 +28,9 @@ class _FavoritePageState extends State<FavoritePage> {
   List<Deal> deals = List.empty();
   bool isLoading = false;
   int _selectedIndex = 0;
+  var controller;
+
+  _FavoritePageState(this.controller);
 
   @override
   void initState() {
@@ -78,7 +81,7 @@ class _FavoritePageState extends State<FavoritePage> {
                                 'Favorite Deal : ${favdeals.length.toString()} Deals Now!',
                                 style: TextStyle(
                                     fontWeight: FontWeight.w900,
-                                    color: Colors.white),
+                                    color: Colors.deepPurple),
                               )),
                         ),
                       ],
@@ -98,7 +101,10 @@ class _FavoritePageState extends State<FavoritePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => JoinDeal(ds: ds)),
+                                    builder: (context) => DealDetail2(
+                                          ds: ds,
+                                          controller: controller,
+                                        )),
                               );
                             },
                             child: Card(

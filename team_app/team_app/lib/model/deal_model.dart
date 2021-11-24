@@ -55,3 +55,54 @@ class AllDeals {
     return AllDeals(deals);
   }
 }
+
+class Joiner {
+  String jointID;
+  String jointUID;
+  String jointName;
+  String jointPhone;
+  String jointEmail;
+  String jointImage;
+
+  Joiner(
+    this.jointID,
+    this.jointUID,
+    this.jointName,
+    this.jointPhone,
+    this.jointEmail,
+    this.jointImage,
+  );
+
+  factory Joiner.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return Joiner(
+        json['jointID'] as String,
+        json['joint_uid'] as String,
+        json['joint_fullname'] as String,
+        json['joint_email'] as String,
+        json['joint_phoneNo'] as String,
+        json['joint_image'] as String);
+  }
+}
+
+class AllJoiners {
+  final List<Joiner> joiners;
+  AllJoiners(this.joiners);
+
+  factory AllJoiners.fromJson(List<dynamic> json) {
+    List<Joiner> joiners;
+
+    joiners = json.map((index) => Joiner.fromJson(index)).toList();
+
+    return AllJoiners(joiners);
+  }
+
+  factory AllJoiners.fromSnapshot(QuerySnapshot s) {
+    List<Joiner> joiners = s.docs.map((DocumentSnapshot ds) {
+      return Joiner.fromJson(ds.data() as Map<String, dynamic>);
+    }).toList();
+
+    return AllJoiners(joiners);
+  }
+}

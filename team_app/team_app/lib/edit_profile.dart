@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// import 'package:date_field/date_field.dart';
+import 'package:team_app/profile.dart';
 import 'package:team_app/model/profile_model.dart';
 import 'package:team_app/model/user_model.dart';
 
@@ -63,33 +65,33 @@ class _EditProfileFormState extends State<EditProfileForm> {
               Container(
                 width: 500,
                 padding: EdgeInsets.all(10.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Username",
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(28.0),
-                      borderSide: BorderSide(color: Colors.deepPurple.shade600),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(28.0),
-                      borderSide: BorderSide(
-                        color: Colors.amber,
-                      ),
-                    ),
-                    hintText: "Enter username",
-                    prefixIcon: Icon(Icons.face_retouching_natural,
-                        color: Colors.black45),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter username';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _userName = value;
-                  },
-                ),
+                // child: TextFormField(
+                //   decoration: InputDecoration(
+                //     labelText: "Username",
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(28.0),
+                //       borderSide: BorderSide(color: Colors.deepPurple.shade600),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(28.0),
+                //       borderSide: BorderSide(
+                //         color: Colors.amber,
+                //       ),
+                //     ),
+                //     hintText: "Enter username",
+                //     prefixIcon: Icon(Icons.face_retouching_natural,
+                //         color: Colors.black45),
+                //   ),
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter username';
+                //     }
+                //     return null;
+                //   },
+                //   onSaved: (value) {
+                //     _userName = value;
+                //   },
+                // ),
               ),
               Container(
                 width: 500,

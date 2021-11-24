@@ -29,4 +29,8 @@ class DealController {
   Future<void> updateFavDeal(int i, bool isFav) async {
     await services.updateFavDeal(i, isFav);
   }
+
+  Future<void> updateDeals(String uid, bool isClosed) async {
+    await services.updateDeals(uid, isClosed);
+  }
 }

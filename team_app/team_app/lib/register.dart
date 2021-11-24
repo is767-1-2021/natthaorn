@@ -264,10 +264,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
                                     .doc(userCredential.user!.uid)
                                     .set({
                                   /*mapping*/
-                                  'userId': userCredential.user!.uid,
+                                  'uid': userCredential.user!.uid,
                                   'fullname': _fullname,
                                   'email': _email,
-                                  'password': _password,
                                   'phoneNo': _phoneNo,
                                   'image':
                                       'https://firebasestorage.googleapis.com/v0/b/is-project01.appspot.com/o/user_image%2Fuser03.png?alt=media&token=9b32b994-d8f1-4982-8145-e8b890d3ccbc',

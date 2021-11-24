@@ -10,6 +10,9 @@ import 'package:team_app/services/deal_services.dart';
 import 'around_you.dart';
 import 'create_deal.dart';
 import 'join_deal.dart';
+import 'model/deal_model2.dart';
+import 'model/user_model2.dart';
+import 'package:provider/provider.dart';
 
 class DealPage extends StatefulWidget {
   var controller;
@@ -20,18 +23,29 @@ class DealPage extends StatefulWidget {
   }
 
   @override
-  _DealPageState createState() => _DealPageState();
+  _DealPageState createState() => _DealPageState(this.controller);
 }
 
 class _DealPageState extends State<DealPage> {
   List<Deal> deals = List.empty();
   bool isLoading = false;
-  bool _isFavorited = false;
   int _selectedIndex = 0;
+  bool _isFavorited = false;
+  var controller;
+
+  _DealPageState(this.controller);
 
   @override
   void initState() {
     _getDeals();
+    var ds = FirebaseServices();
+    var dealList = ds.getFromFirebase(context.read<UserModel>().uid);
+    dealList.then((value) {
+      context.read<DealModel>().dealList = value;
+      print(context.read<DealModel>().dealID);
+      print(context.read<UserModel>().uid);
+    });
+
     super.initState();
 
     widget.controller.onSync
@@ -56,8 +70,8 @@ class _DealPageState extends State<DealPage> {
     });
   }
 
-  void _updateFavDeal(int i, bool isFav) async {
-    await FirebaseServices().updateFavDeal(i, !deals[i].isFav);
+  void _updateFavDeal(int index, bool isFav) async {
+    await FirebaseServices().updateFavDeal(index, !deals[index].isFav);
   }
 
   @override
@@ -100,7 +114,7 @@ class _DealPageState extends State<DealPage> {
                                 'Upcoiming Deal : ${deals.length.toString()} Deals Now!',
                                 style: TextStyle(
                                     fontWeight: FontWeight.w900,
-                                    color: Colors.white),
+                                    color: Colors.deepPurple),
                               )),
                         ),
                       ],
@@ -120,12 +134,13 @@ class _DealPageState extends State<DealPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => JoinDeal(ds: ds)),
+                                    builder: (context) => DealDetail2(
+                                        ds: ds, controller: controller)),
                               );
                             },
                             child: Card(
                               color: Colors.white,
-                              shadowColor: Colors.grey,
+                              shadowColor: Colors.grey[200],
                               margin: EdgeInsets.only(
                                   top: 5.0, right: 5.0, left: 5.0),
                               shape: Border(
@@ -224,18 +239,20 @@ class _DealPageState extends State<DealPage> {
                                             color: Colors.red,
                                             iconSize: 18,
                                             onPressed: () async {
-                                              setState(() {
-                                                if (deals[index].isFav) {
-                                                  deals[index].isFav = false;
-                                                } else {
-                                                  deals[index].isFav = true;
-                                                }
-                                                _updateFavDeal(
-                                                    index, !deals[index].isFav);
-                                              });
+                                              setState(
+                                                () {
+                                                  if (deals[index].isFav) {
+                                                    deals[index].isFav = false;
+                                                  } else {
+                                                    deals[index].isFav = true;
+                                                  }
+                                                  _updateFavDeal(index,
+                                                      !deals[index].isFav);
+                                                },
+                                              );
                                             }),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                               ),
@@ -260,7 +277,7 @@ class _DealPageState extends State<DealPage> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
+        showSelectedLabels: true,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
         iconSize: 30.0,
