@@ -1,14 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:team_app/controllers/deal_controller.dart';
-
 import 'package:team_app/profile.dart';
 
 class HelpCenterPage extends StatelessWidget {
-  final DealController controller;
-
-  const HelpCenterPage({Key? key, required this.controller}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,12 +10,8 @@ class HelpCenterPage extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Profile2Page(
-                          controller: controller,
-                        )));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Profile2Page()));
           },
           icon: Icon(Icons.arrow_back),
         ),

@@ -238,9 +238,6 @@ class _NewDealState extends State<NewDeal> {
             width: 300,
             child: ElevatedButton(
               onPressed: () async {
-                var services = FirebaseServices();
-                var controller = DealController(services);
-
                 User? user = FirebaseAuth.instance.currentUser;
 
                 if (_dealdetail.currentState!.validate()) {
@@ -265,12 +262,8 @@ class _NewDealState extends State<NewDeal> {
                   // ScaffoldMessenger.of(context).showSnackBar(context: )
                   /*pushReplacement ให้ใส่หน้าใหม่เข้ามาแทน+รีเฟรชด้วย แทนหน้าเดิม*/
                   Navigator.pop(context);
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DealPage(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => DealPage()));
                 }
               },
               child: Text(

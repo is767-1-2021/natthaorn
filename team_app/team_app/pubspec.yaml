@@ -45,6 +45,7 @@ dependencies:
   proste_dialog: ^2.1.2
   firebase_analytics: ^8.3.4
   firebase_storage: ^10.0.6
+  date_field: ^2.1.2
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +88,7 @@ flutter:
      - image/HOTPOT4BUY3.jpg
      - image/logo4.jpg
      - image/bg2.png
+     - image/starbucks.jpg
 
 
 

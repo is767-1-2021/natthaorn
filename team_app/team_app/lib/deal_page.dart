@@ -12,12 +12,15 @@ import 'create_deal.dart';
 import 'join_deal.dart';
 
 class DealPage extends StatefulWidget {
-  final DealController controller;
+  var controller;
+  var service = FirebaseServices();
 
-  const DealPage({Key? key, required this.controller}) : super(key: key);
+  DealPage() {
+    controller = DealController(service);
+  }
 
   @override
-  _DealPageState createState() => _DealPageState(this.controller);
+  _DealPageState createState() => _DealPageState();
 }
 
 class _DealPageState extends State<DealPage> {
@@ -25,9 +28,6 @@ class _DealPageState extends State<DealPage> {
   bool isLoading = false;
   bool _isFavorited = false;
   int _selectedIndex = 0;
-  var controller;
-
-  _DealPageState(this.controller);
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _DealPageState extends State<DealPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[900],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Enjoy with the best Deal!',
@@ -124,12 +124,13 @@ class _DealPageState extends State<DealPage> {
                               );
                             },
                             child: Card(
-                              color: Colors.grey[100],
+                              color: Colors.white,
+                              shadowColor: Colors.grey,
                               margin: EdgeInsets.only(
                                   top: 5.0, right: 5.0, left: 5.0),
                               shape: Border(
                                   left: BorderSide(
-                                      color: Colors.pink, width: 5.0)),
+                                      color: Colors.amber, width: 5.0)),
                               child: Container(
                                 width: double.infinity,
                                 height: 100.0,
@@ -178,7 +179,7 @@ class _DealPageState extends State<DealPage> {
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
-                                                  color: Colors.deepPurple[900],
+                                                  color: Colors.deepPurple,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18.0)),
                                           Text(deals[index].caption,
@@ -218,13 +219,20 @@ class _DealPageState extends State<DealPage> {
                                         height: 35.0,
                                         child: IconButton(
                                             icon: deals[index].isFav == true
-                                                ? Icon(Icons.favorite)
-                                                : Icon(Icons.favorite_outline),
+                                                ? Icon(Icons.favorite_outline)
+                                                : Icon(Icons.favorite),
                                             color: Colors.red,
                                             iconSize: 18,
                                             onPressed: () async {
-                                              _updateFavDeal(
-                                                  index, !deals[index].isFav);
+                                              setState(() {
+                                                if (deals[index].isFav) {
+                                                  deals[index].isFav = false;
+                                                } else {
+                                                  deals[index].isFav = true;
+                                                }
+                                                _updateFavDeal(
+                                                    index, !deals[index].isFav);
+                                              });
                                             }),
                                       ),
                                     ),
@@ -244,7 +252,7 @@ class _DealPageState extends State<DealPage> {
       ),
       floatingActionButton: FloatingActionButton(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.deepPurple[900],
+        backgroundColor: Colors.deepPurple,
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.pushReplacement(
@@ -259,7 +267,7 @@ class _DealPageState extends State<DealPage> {
         selectedFontSize: 14.0,
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Colors.deepPurple[900],
+            backgroundColor: Colors.deepPurple,
             icon: InkWell(
               child: Icon(Icons.home, color: Colors.white),
               onTap: () {},
@@ -279,12 +287,8 @@ class _DealPageState extends State<DealPage> {
             icon: InkWell(
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Profile2Page(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Profile2Page()));
                 }),
             label: 'Profile',
           ),
@@ -292,12 +296,8 @@ class _DealPageState extends State<DealPage> {
             icon: InkWell(
                 child: Icon(Icons.message, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChatScreen(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()));
                 }),
             label: 'Message',
           ),

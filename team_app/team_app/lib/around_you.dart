@@ -39,7 +39,7 @@ class _LocationPageState extends State<LocationPage> {
     return Scaffold(
       appBar: AppBar(
           title: const Text('Location', style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.deepPurple[900],
+          backgroundColor: Colors.deepPurple,
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.search)),
             IconButton(
@@ -161,16 +161,12 @@ class _LocationPageState extends State<LocationPage> {
         selectedFontSize: 14.0,
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Colors.deepPurple[900],
+            backgroundColor: Colors.deepPurple,
             icon: InkWell(
               child: Icon(Icons.home, color: Colors.white),
               onTap: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DealPage(
-                              controller: controller,
-                            )));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => DealPage()));
               },
             ),
             label: 'Home',
@@ -184,12 +180,8 @@ class _LocationPageState extends State<LocationPage> {
             icon: InkWell(
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Profile2Page(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Profile2Page()));
                 }),
             label: 'Profile',
           ),
@@ -197,12 +189,8 @@ class _LocationPageState extends State<LocationPage> {
             icon: InkWell(
                 child: Icon(Icons.message, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChatScreen(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()));
                 }),
             label: 'Message',
           ),

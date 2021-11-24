@@ -26,9 +26,7 @@ class _MsgBubbleState extends State<MsgBubble> {
               width: 200,
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
               decoration: BoxDecoration(
-                color: widget.isMe
-                    ? Colors.grey[300]
-                    : Theme.of(context).accentColor,
+                color: widget.isMe ? Colors.deepPurple[50] : Colors.deepPurple,
                 borderRadius: widget.isMe
                     ? BorderRadius.only(
                         topRight: Radius.circular(12),

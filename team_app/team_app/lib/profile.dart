@@ -1,25 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:team_app/deal_page.dart';
+import 'package:team_app/around_you.dart';
 import 'package:team_app/edit_profile.dart';
 import 'package:team_app/favorite_page.dart';
-import 'package:team_app/firstpage.dart';
 import 'package:team_app/help_center_page.dart';
 import 'package:team_app/historyPageDeal.dart';
 import 'package:team_app/privacy_policy_page.dart';
 import 'package:team_app/screens/chat_screen.dart';
-import 'package:team_app/services/deal_services.dart';
 import 'package:team_app/term_of_service_page.dart';
 
-import 'around_you.dart';
-import 'controllers/deal_controller.dart';
-
 class Profile2Page extends StatefulWidget {
-  final DealController controller;
-
-  const Profile2Page({Key? key, required this.controller}) : super(key: key);
+  const Profile2Page({Key? key}) : super(key: key);
 
   @override
   _Profile2PageState createState() => _Profile2PageState();
@@ -42,7 +34,7 @@ class _Profile2PageState extends State<Profile2Page> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.deepPurple[900],
+        backgroundColor: Colors.deepPurple,
         title: Text(
           'Profile',
           style: TextStyle(color: Colors.white),
@@ -61,23 +53,17 @@ class _Profile2PageState extends State<Profile2Page> {
               ),
             ],
             onSelected: (result) {
-              var services = FirebaseServices();
-              var controller = DealController(services);
               if (result == 1) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PrivacyPolicyPage(
-                              controller: controller,
-                            )));
+                        builder: (context) => PrivacyPolicyPage()));
               }
               if (result == 2) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => TermsOfServicePage(
-                              controller: controller,
-                            )));
+                        builder: (context) => TermsOfServicePage()));
               }
             },
           ),
@@ -173,18 +159,11 @@ class _Profile2PageState extends State<Profile2Page> {
                                                   EdgeInsets.only(left: 10),
                                               child: ElevatedButton(
                                                 onPressed: () {
-                                                  var services =
-                                                      FirebaseServices();
-                                                  var controller =
-                                                      DealController(services);
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              EditProfilePage(
-                                                                controller:
-                                                                    controller,
-                                                              )));
+                                                              EditProfilePage()));
                                                 },
                                                 style: ElevatedButton.styleFrom(
                                                   primary: Colors
@@ -391,16 +370,11 @@ class _Profile2PageState extends State<Profile2Page> {
                                     child: Card(
                                       child: ListTile(
                                         onTap: () {
-                                          var services = FirebaseServices();
-                                          var controller =
-                                              DealController(services);
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      HelpCenterPage(
-                                                        controller: controller,
-                                                      )));
+                                                      HelpCenterPage()));
                                         },
                                         title: Text(
                                           'Help Center',
@@ -417,13 +391,9 @@ class _Profile2PageState extends State<Profile2Page> {
                                     padding: EdgeInsets.all(10),
                                     child: ElevatedButton(
                                       child: Text('Log Out'),
-                                      onPressed: () async {
-                                        await FirebaseAuth.instance.signOut();
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomePage()));
+                                      onPressed: () {
+                                        Navigator.popUntil(context,
+                                            ModalRoute.withName('/home'));
                                       },
                                       style: ElevatedButton.styleFrom(
                                           primary: Colors.deepPurple.shade600,
@@ -446,19 +416,10 @@ class _Profile2PageState extends State<Profile2Page> {
         selectedFontSize: 14.0,
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Colors.deepPurple[900],
+            backgroundColor: Colors.deepPurple,
             icon: InkWell(
               child: Icon(Icons.home, color: Colors.white),
-              onTap: () {
-                var services = FirebaseServices();
-                var controller = DealController(services);
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DealPage(
-                              controller: controller,
-                            )));
-              },
+              onTap: () {},
             ),
             label: 'Home',
           ),
@@ -475,14 +436,8 @@ class _Profile2PageState extends State<Profile2Page> {
             icon: InkWell(
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
-                  var services = FirebaseServices();
-                  var controller = DealController(services);
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Profile2Page(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Profile2Page()));
                 }),
             label: 'Profile',
           ),
@@ -490,14 +445,8 @@ class _Profile2PageState extends State<Profile2Page> {
             icon: InkWell(
                 child: Icon(Icons.message, color: Colors.white),
                 onTap: () {
-                  var services = FirebaseServices();
-                  var controller = DealController(services);
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChatScreen(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()));
                 }),
             label: 'Message',
           ),

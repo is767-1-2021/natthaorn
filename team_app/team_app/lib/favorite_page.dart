@@ -20,16 +20,14 @@ class FavoritePage extends StatefulWidget {
   }
 
   @override
-  _FavoritePageState createState() => _FavoritePageState(this.controller);
+  _FavoritePageState createState() => _FavoritePageState();
 }
 
 class _FavoritePageState extends State<FavoritePage> {
   List<Deal> favdeals = List.empty();
+  List<Deal> deals = List.empty();
   bool isLoading = false;
   int _selectedIndex = 0;
-  var controller;
-
-  _FavoritePageState(this.controller);
 
   @override
   void initState() {
@@ -48,10 +46,14 @@ class _FavoritePageState extends State<FavoritePage> {
     });
   }
 
+  void _updateFavDeal(int i, bool isFav) async {
+    await FirebaseServices().updateFavDeal(i, !deals[i].isFav);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[900],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Enjoy with the best Deal!',
@@ -100,7 +102,8 @@ class _FavoritePageState extends State<FavoritePage> {
                               );
                             },
                             child: Card(
-                              color: Colors.grey[100],
+                              color: Colors.white,
+                              shadowColor: Colors.grey,
                               margin: EdgeInsets.only(
                                   top: 5.0, right: 5.0, left: 5.0),
                               shape: Border(
@@ -155,7 +158,7 @@ class _FavoritePageState extends State<FavoritePage> {
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
-                                                  color: Colors.deepPurple[900],
+                                                  color: Colors.deepPurple,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18.0)),
                                           Text(favdeals[index].caption,
@@ -194,12 +197,21 @@ class _FavoritePageState extends State<FavoritePage> {
                                           width: 35.0,
                                           height: 35.0,
                                           child: IconButton(
-                                            icon: Icon(
-                                              Icons.favorite,
-                                              color: Colors.red,
-                                            ),
-                                            onPressed: () {},
-                                          )),
+                                              icon: Icon(
+                                                Icons.favorite,
+                                                color: Colors.red,
+                                              ),
+                                              onPressed: () async {
+                                                setState(() {
+                                                  if (deals[index].isFav) {
+                                                    deals[index].isFav = false;
+                                                  } else {
+                                                    deals[index].isFav = true;
+                                                  }
+                                                  _updateFavDeal(index,
+                                                      !deals[index].isFav);
+                                                });
+                                              })),
                                     ),
                                   ],
                                 ),
@@ -223,7 +235,7 @@ class _FavoritePageState extends State<FavoritePage> {
         selectedFontSize: 14.0,
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Colors.deepPurple[900],
+            backgroundColor: Colors.deepPurple,
             icon: InkWell(
               child: Icon(Icons.home, color: Colors.white),
               onTap: () {},
@@ -243,12 +255,8 @@ class _FavoritePageState extends State<FavoritePage> {
             icon: InkWell(
                 child: Icon(Icons.person, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Profile2Page(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Profile2Page()));
                 }),
             label: 'Profile',
           ),
@@ -256,12 +264,8 @@ class _FavoritePageState extends State<FavoritePage> {
             icon: InkWell(
                 child: Icon(Icons.message, color: Colors.white),
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChatScreen(
-                                controller: controller,
-                              )));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()));
                 }),
             label: 'Message',
           ),

@@ -1,14 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:team_app/controllers/deal_controller.dart';
 import 'package:team_app/deal_page.dart';
 import 'package:team_app/widgets/messages.dart';
 import 'package:team_app/widgets/new_msg.dart';
 
 class ChatScreen extends StatelessWidget {
-  final DealController controller;
-
-  const ChatScreen({Key? key, required this.controller}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +16,9 @@ class ChatScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DealPage(controller: controller)));
+            onPressed: () async {
+              FirebaseAuth _auth = FirebaseAuth.instance;
+              await _auth.signOut();
             },
             icon: Icon(Icons.exit_to_app),
           ),

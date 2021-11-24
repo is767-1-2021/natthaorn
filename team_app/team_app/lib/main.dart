@@ -43,7 +43,7 @@ class DealApp extends StatelessWidget {
       ],
       child: MaterialApp(
           theme: ThemeData(
-              primaryColor: Colors.deepPurple[900],
+              primaryColor: Colors.deepPurple,
               fontFamily: 'IBM Plex Sans Thai'),
           debugShowCheckedModeBanner: false,
           home: StreamBuilder(

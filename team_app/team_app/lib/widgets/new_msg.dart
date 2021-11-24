@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/editable_text.dart';
+import 'package:team_app/model/user_model2.dart';
+import 'package:provider/provider.dart';
 
 class NewMessage extends StatefulWidget {
   @override
@@ -53,8 +54,9 @@ class _NewMessageState extends State<NewMessage> {
                       'text': _enteredMsg,
                       'createdAt': Timestamp.now(),
                       'userId': _auth.currentUser!.uid,
-                      'username': userdata['userName'],
-                      'userImage': userdata['image'],
+                      'username': _auth.currentUser!.email,
+                      'userImage':
+                          'https://firebasestorage.googleapis.com/v0/b/is-project01.appspot.com/o/user_image%2Fuser03.png?alt=media&token=9b32b994-d8f1-4982-8145-e8b890d3ccbc'
                     });
                     msgCon.clear();
                     setState(() {

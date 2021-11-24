@@ -1,17 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:team_app/profile.dart';
+
 import 'package:team_app/model/profile_model.dart';
 import 'package:team_app/model/user_model.dart';
 
-import 'controllers/deal_controller.dart';
+import 'package:team_app/profile.dart';
 
 class EditProfilePage extends StatelessWidget {
-  final DealController controller;
-
-  const EditProfilePage({Key? key, required this.controller}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +17,8 @@ class EditProfilePage extends StatelessWidget {
         backgroundColor: Colors.deepPurple[600],
         leading: IconButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Profile2Page(
-                          controller: controller,
-                        )));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Profile2Page()));
           },
           icon: Icon(Icons.arrow_back),
         ),
