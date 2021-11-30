@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "49111116277",
+    "project_id": "is767-2021-natthaorn",
+    "storage_bucket": "is767-2021-natthaorn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49111116277:android:33a00468d9868702d298bc",
+        "android_client_info": {
+          "package_name": "com.example.final_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49111116277-kae92ibul598njk7lu1a5gec4bath9lk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDthpwVk9S8MZqxbiPeYenVozVNbybWv04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49111116277-kae92ibul598njk7lu1a5gec4bath9lk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
